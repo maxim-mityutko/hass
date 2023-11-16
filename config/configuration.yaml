@@ -1,0 +1,10 @@
+# partial config
+switch: !include template_switches.yaml
+
+zha:
+  custom_quirks_path: /config/custom_zha_quirks/
+
+recorder:
+  purge_keep_days: 365
+  db_url: !secret postgres_connection_string
+  db_retry_wait: 30
