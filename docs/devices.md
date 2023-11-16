@@ -1,6 +1,7 @@
 ## Tasmota
 * [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html)
 * [Yuabguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html)
+* [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4)
 
 ## ESPHome
 * [Marcel Zuidwijk's Smart Doorbell](https://www.zuidwijk.com/product/smart-doorbell/)
