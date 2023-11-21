@@ -20,3 +20,7 @@
 * [Ledvance Outdoor Plug](https://zigbee.blakadder.com/Ledvance_4058075729322.html)
 * [Heiman HS1SA Smoke Sensor](https://zigbee.blakadder.com/Heiman_HS1SA.html)
 * [Lonsonho (?) Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html)
+* Tuya SZ-T04 - Temperature & Humidity
+  * Custom Quirk: [TS0601 Temperature](https://github.com/jacekk015/zha_quirks/blob/main/ts0601_temperature.py) 
+  * Custom Quirk Issue Thread: [TZE200_locansqn TS0601 Temp / Humi / Clock](https://github.com/zigpy/zha-device-handlers/issues/1286)
+  * Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
