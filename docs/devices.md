@@ -24,3 +24,5 @@
   * Custom Quirk: [TS0601 Temperature](https://github.com/jacekk015/zha_quirks/blob/main/ts0601_temperature.py) 
   * Custom Quirk Issue Thread: [TZE200_locansqn TS0601 Temp / Humi / Clock](https://github.com/zigpy/zha-device-handlers/issues/1286)
   * Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
+* [Tuya WSD500A - Temperature and Humidity Sensor](https://zigbee.blakadder.com/Tuya_WSD500A.html)
+  * Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
