@@ -6,6 +6,7 @@
 ## ESPHome
 * [Marcel Zuidwijk's Smart Doorbell](https://www.zuidwijk.com/product/smart-doorbell/)
   * Docs: https://www.zuidwijk.com/smart-doorbell/
+  * Repo: https://github.com/zuidwijk/esphome-doorbell/blob/main/smart-doorbell.yaml
 * [WaterP1MeterKit](https://waterp1meterkit.nl/)
   * Docs: https://smarthomeshop.io/handleiding/waterp1meterkit
   * Repo: https://github.com/smarthomeshop/waterp1meterkit
