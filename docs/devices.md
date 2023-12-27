@@ -1,3 +1,8 @@
+# Devices
+## General Notes
+- All the devices should work with Home Assistant out-of-the-box or with minimal effort
+- Being able to run integration locally is highly preferred
+
 ## Tasmota
 * [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html)
 * [Yuabguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html)
@@ -13,7 +18,7 @@
 
 ## Zigbee
 * [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/)
-  * Earlier model is amon recommended adapters in Zigbee2MQTT: https://www.zigbee2mqtt.io/guide/adapters/#recommended
+  * Earlier model is among recommended adapters in Zigbee2MQTT: https://www.zigbee2mqtt.io/guide/adapters/#recommended
 * [Univeral Infrared Remote Controller](https://zigbee.blakadder.com/Moes_UFO-R11.html)
   * Custom Quirk: [TS1201](https://github.com/ferehcarb/zha-device-handlers/blob/dev/zhaquirks/tuya/ts1201.py)
   * Usage instructions: [RTX Zigbee Tuya ZIR aka. TS1201](https://github.com/zigpy/zha-device-handlers/issues/1687)
@@ -27,3 +32,12 @@
   * Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
 * [Tuya WSD500A - Temperature and Humidity Sensor](https://zigbee.blakadder.com/Tuya_WSD500A.html)
   * Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
+
+## Flic
+  * [Flic Hub LR](https://flic.io/shop/flic-hub-lr)
+    * Hub setup requires account creation with email, however the registration process does not send any 
+    confirmation emails , hence even the bogus email address can be provided
+    * Hub supports MQTT integration with custom JS scripts:
+      * [flic2hass](https://github.com/id628/flic2hass) - MQTT integration by **id628** ([discussion](https://community.home-assistant.io/t/direct-flic-button-via-flic-hub-mqtt-integration-cloudless/553108))
+      * [flic-hub-sdk-mqtt-js](https://github.com/50ButtonsEach/flic-hub-sdk-mqtt-js) - MQTT client
+  * [Flic2 Button](https://flic.io/flic2)
