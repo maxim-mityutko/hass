@@ -1,5 +1,7 @@
 # Description: Change entity's brightness in sequence based on the predefined conditions.
 # Version: 2023.12.28
+# Parameters:
+#   - entity: entity_id
 alias: Lights Brightness Sequence
 sequence:
   - variables:
