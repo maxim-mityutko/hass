@@ -1,0 +1,14 @@
+# Description: Change entity's brightness.
+# Version: 2023.12.28
+# Parameters:
+#   - entity: entity_id
+#   - brightness: brightness value
+alias: Lights Brightness
+sequence:
+  - service: light.turn_on
+    target:
+      entity_id: "{{ entity }}"
+    data:
+      brightness: "{{ brightness }}"
+mode: single
+icon: mdi:brightness-percent

@@ -1,0 +1,19 @@
+# Description: Change entity's brightness in sequence based on the predefined conditions.
+# Version: 2023.12.28
+# Parameters:
+#   - ieee: ZigBee device identifier obtainable from `Device Info -> ZigBee Info -> IEEE
+#   - code: IR code sequence
+alias: ZigBee IR Gateway
+sequence:
+  - service: zha.issue_zigbee_cluster_command
+    data:
+      cluster_type: in
+      endpoint_id: 1
+      cluster_id: 57348
+      command: 2
+      command_type: server
+      ieee: "{{ ieee }}"
+      params:
+        code: "{{ code }}"
+mode: single
+icon: mdi:remote
