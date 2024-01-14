@@ -46,3 +46,5 @@
 ## Shelly
   * [Shelly Plus 2PM](https://www.shelly.com/en-nl/products/product-overview/shelly-plus-2-pm) (x2)
   * [Shelly 1PM Mini Gen3](https://www.shelly.com/en-nl/products/product-overview/shelly-1-pm-mini-gen3) (x1)
+  * [Shelly 1 Mini Gen3](https://www.shelly.com/en/products/shop/shelly-1-mini-gen-3) (x1)
+  * [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x1)
