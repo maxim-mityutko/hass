@@ -15,10 +15,17 @@
 * [WaterP1MeterKit](https://waterp1meterkit.nl/) (x1)
   * Docs: https://smarthomeshop.io/handleiding/waterp1meterkit
   * Repo: https://github.com/smarthomeshop/waterp1meterkit
+ * [SlimmeLezer](https://www.zuidwijk.com/product/slimmelezer-plus/) (x1 not installed)
+   * Replaced with `WaterP1MeterKit` in favour of PoE and water metering
+   * Repo: https://github.com/zuidwijk/dsmr 
+    
 
 ## Zigbee
 * [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1)
+  * Used with ZHA
   * Earlier model is among recommended adapters in Zigbee2MQTT: https://www.zigbee2mqtt.io/guide/adapters/#recommended
+* [SMLIGHT SLZB-06p10 Controller with POE](https://smlight.tech/product/slzb-06p10/) (x1)
+  * Used with Zigbee2MQTT
 * [Univeral Infrared Remote Controller](https://zigbee.blakadder.com/Moes_UFO-R11.html) (x2)
   * Custom Quirk: [TS1201](https://github.com/ferehcarb/zha-device-handlers/blob/dev/zhaquirks/tuya/ts1201.py)
   * Usage instructions: [RTX Zigbee Tuya ZIR aka. TS1201](https://github.com/zigpy/zha-device-handlers/issues/1687)
@@ -41,7 +48,8 @@
     * Hub supports MQTT integration with custom JS scripts:
       * [flic2hass](https://github.com/id628/flic2hass) - MQTT integration by **id628** ([discussion](https://community.home-assistant.io/t/direct-flic-button-via-flic-hub-mqtt-integration-cloudless/553108))
       * [flic-hub-sdk-mqtt-js](https://github.com/50ButtonsEach/flic-hub-sdk-mqtt-js) - MQTT client
-  * [Flic2 Button](https://flic.io/flic2) (x3)
+  * [Flic2 Button](https://flic.io/flic2) (x3 not in use, replace with `Shelly BLU Button Tough 1`)
+  * [Flic Twist](https://flic.io/twist) (x2)
 
 ## Shelly
   * [Shelly Plus 2PM](https://www.shelly.com/en-nl/products/product-overview/shelly-plus-2-pm) (x2)
@@ -49,3 +57,4 @@
   * [Shelly 1 Mini Gen3](https://www.shelly.com/en/products/shop/shelly-1-mini-gen-3) (x1)
   * [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2)
   * [Shelly BLU H&T](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-h-and-t) (x1)
+  * [Shelly BLU Button Tough 1](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-button-tough-1-matte-black) (x3)
