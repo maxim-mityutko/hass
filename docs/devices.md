@@ -40,6 +40,8 @@
   * Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
 * [Tuya WSD500A - Temperature and Humidity Sensor](https://zigbee.blakadder.com/Tuya_WSD500A.html) (x2)
   * Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
+ * [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x6)
+   * Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
 
 ## Flic
   * [Flic Hub LR](https://flic.io/shop/flic-hub-lr) (x1)
@@ -48,7 +50,7 @@
     * Hub supports MQTT integration with custom JS scripts:
       * [flic2hass](https://github.com/id628/flic2hass) - MQTT integration by **id628** ([discussion](https://community.home-assistant.io/t/direct-flic-button-via-flic-hub-mqtt-integration-cloudless/553108))
       * [flic-hub-sdk-mqtt-js](https://github.com/50ButtonsEach/flic-hub-sdk-mqtt-js) - MQTT client
-  * [Flic2 Button](https://flic.io/flic2) (x3 not in use, replace with `Shelly BLU Button Tough 1`)
+  * [Flic2 Button](https://flic.io/flic2) (x3 not in use, replaced with `Shelly BLU Button Tough 1`)
   * [Flic Twist](https://flic.io/twist) (x2)
 
 ## Shelly
