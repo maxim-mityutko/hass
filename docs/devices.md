@@ -42,6 +42,7 @@
   * Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
  * [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x6)
    * Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
+ * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x3)
 
 ## Flic
   * [Flic Hub LR](https://flic.io/shop/flic-hub-lr) (x1)
