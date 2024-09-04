@@ -1,0 +1,62 @@
+type: sections
+max_columns: 4
+sections:
+  - type: grid
+    cards:
+      - type: custom:mushroom-title-card
+        title: 'Overview '
+        subtitle: >-
+          Last update: {{
+          as_timestamp(states('sensor.c5x_mileage_update_at'))  |
+          timestamp_custom('%Y-%m-%d at %H:%M') }}
+      - type: picture
+        image: /local/images/cars/citroen-c5x.png
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_battery_autonomy
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_fuel_autonomy
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_battery_level
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_battery_voltage
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_mileage
+        layout_options:
+          grid_columns: 4
+          grid_rows: 1
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_battery_health_capacity
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_battery_health_resistance
+  - type: grid
+    cards:
+      - type: custom:mushroom-title-card
+        title: Charging
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_charging_plugged
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_charging_status
+        name: Status
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_charging_rate
+        name: Rate
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_charging_remaining_time
+  - type: grid
+    cards:
+      - type: custom:mushroom-title-card
+        title: Climate
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_ambient_temperature
+      - type: custom:mushroom-entity-card
+        entity: sensor.c5x_preconditioning_status
+        name: Preconditioning
+  - type: grid
+    cards:
+      - type: custom:mushroom-title-card
+        title: Location
+      - type: map
+        entities:
+          - entity: device_tracker.c5x_position
+        theme_mode: dark
+        default_zoom: 16
