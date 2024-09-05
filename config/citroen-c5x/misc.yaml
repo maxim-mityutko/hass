@@ -3,7 +3,7 @@
 
 # Base sensor that returns various JSON attributes for the vehicle.
 # It is not used directly, but wrapped into dedicated sensors that 
-# pull attribute values from this one.
+# pull attribute values from this one
 sensor:
   - platform: rest
     name: "Citroen C5X"
@@ -21,6 +21,7 @@ sensor:
     unique_id: citroen_c5x
 
 template:
+  # Expose attributes from "citroen_c5x" as sensors
   - sensor:
     # Timed Odometer
     - name: "C5X Mileage"
@@ -142,6 +143,7 @@ template:
       unique_id: c5x_longitude
       icon: mdi:longitude
       state: "{{ state_attr('sensor.citroen_c5x', 'last_position')['geometry']['coordinates'][0] }}"
+  # Expose attributes from "citroen_c5x" as binary sensors
   - binary_sensor:
     # Energy (Battery)
     - name: "C5X Charging Plugged"
@@ -153,6 +155,7 @@ template:
       unique_id: c5x_preconditioning_active
       device_class: running
       state: "{{ iif(state_attr('sensor.citroen_c5x', 'preconditionning')['air_conditioning']['status'] == 'Enabled', true, false) }}"
+  # Create buttons to pair with REST API commands
   - button:
       name: "C5X Charging Threshold Button"
       unique_id: c5x_charging_threshold_button
@@ -201,7 +204,7 @@ rest_command:
     method: GET
 
 automation:
-  # Device Tracker
+  # Device tracker for car location
   - alias: "Citroen C5X: Position"
     description: Create or update Citroen C5X device tracker
     trigger:
