@@ -80,23 +80,19 @@ template:
       state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['battery']['health']['resistance'] }}"
     - name: "C5X Charging Status"
       unique_id: c5x_charging_status
-      icon: >-  # TODO: get icon from c5x_battery_level
-        {% set battery_level = states('sensor.c5x_battery_level')|float -%}
-        {% set charging = iif(is_state('switch.c5x_charging_status', 'InProgress'),'-charging', '') -%}
-        {% if battery_level <= 5 -%}
-          mdi:battery{{charging}}-outline
-        {% elif battery_level > 5 and battery_level <= 25 -%}
-          mdi:battery-charging-low
-        {% elif battery_level > 25 and battery_level <= 65 -%}
-          mdi:battery{{charging}}-medium
-        {% elif battery_level > 65 -%}
-          mdi:battery{{charging}}-high
+      icon: >- 
+        {% if is_state('sensor.c5x_charging_status', 'InProgress') == true -%}
+          mdi:battery-charging
+        {% else -%}
+          mdi:battery-outline
         {% endif -%}
       state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['status'] }}"
-    - name: "C5X Charging Remaining Time" # TODO: parse string
+    - name: "C5X Charging Remaining Time"
       unique_id: c5x_charging_remaining_time
       icon: mdi:clock-time-four-outline
-      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['remaining_time'] }}"
+      state: >-
+        {% set time = state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['remaining_time'] -%}
+        {{ time | replace('PT','') | replace('H','h ') | replace('M','m') }}
     - name: "C5X Charging Mode"
       unique_id: c5x_charging_mode
       icon: >-
