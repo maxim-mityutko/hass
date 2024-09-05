@@ -1,6 +1,7 @@
 automation:
+
   # Device Tracker
-  - alias: Citroen C5X Position
+  - alias: "Citroen C5X: Position"
     description: Create or update Citroen C5X device tracker
     trigger:
       platform: state
@@ -12,3 +13,12 @@ automation:
         gps:
           - "{{ states('sensor.c5x_latitude') }}"
           - "{{ states('sensor.c5x_longitude') }}"
+
+  - alias: "Citroen C5X: Set Charging Threshold"
+    description: "Set charging threshold for the Citroen C5X"
+    trigger:
+      - platform: state
+        entity_id:
+          - input_button.c5x_set_charging_threshold
+    action:
+      - service: rest_command.c5x_set_charging_threshold
