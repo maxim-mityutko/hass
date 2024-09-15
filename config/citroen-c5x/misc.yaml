@@ -12,13 +12,22 @@ sensor:
     timeout: 30
     value_template: 'OK'
     json_attributes:
-    - timed_odometer
-    - battery
-    - energy
-    - environment
-    - preconditionning
-    - last_position
+      - timed_odometer
+      - battery
+      - energy
+      - environment
+      - preconditionning
+      - last_position
     unique_id: citroen_c5x
+  - platform: rest
+    name: "Citroen C5X Charge Control"
+    resource: http://my-psa-car-controller:5000/charge_control?vin=my-vin
+    scan_interval: 60
+    timeout: 30
+    value_template: 'OK'
+    json_attributes:
+      - percentage_threshold
+    unique_id: citroen_c5x_charge_control
 
 template:
   # Expose attributes from "citroen_c5x" as sensors
@@ -36,7 +45,6 @@ template:
       device_class: timestamp
       icon: mdi:calendar
       state: "{{ state_attr('sensor.citroen_c5x', 'timed_odometer')['updated_at'] }}"
-
     # Battery
     - name: "C5X Battery Voltage"
       unique_id: c5x_battery_voltage
@@ -51,7 +59,6 @@ template:
       unit_of_measurement: "A"
       state_class: measurement
       state: "{{ state_attr('sensor.citroen_c5x', 'battery')['current'] }}"
-
     # Energy (Battery)
     - name: "C5X Battery Level"
       unique_id: c5x_battery_level
@@ -129,7 +136,6 @@ template:
       unit_of_measurement: "°C"
       state_class: measurement
       state: "{{ state_attr('sensor.citroen_c5x', 'environment')['air']['temp'] }}"
-
     # Last Position (Coordinates)
     - name: "C5X Latitude"
       unique_id: c5x_latitude
@@ -139,6 +145,15 @@ template:
       unique_id: c5x_longitude
       icon: mdi:longitude
       state: "{{ state_attr('sensor.citroen_c5x', 'last_position')['geometry']['coordinates'][0] }}"
+    # Charge Control
+    - name: "C5X Charging Threshold"
+      unique_id: c5x_charging_threshold
+      device_class: battery
+      unit_of_measurement: "%"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x_charge_control', 'percentage_threshold') }}"
+      icon: mdi:battery-charging
+
   # Expose attributes from "citroen_c5x" as binary sensors
   - binary_sensor:
     # Energy (Battery)
@@ -151,6 +166,7 @@ template:
       unique_id: c5x_preconditioning_active
       device_class: running
       state: "{{ iif(state_attr('sensor.citroen_c5x', 'preconditionning')['air_conditioning']['status'] == 'Enabled', true, false) }}"
+
   # Create buttons to pair with REST API commands
   - button:
       name: "C5X Charging Threshold Button"
@@ -160,13 +176,24 @@ template:
       press:
         - action: rest_command.c5x_set_charging_threshold
 
+  # WIP: Send {{ value }} to the REST Command
+  # - number:
+  #     name: "C5X Charging Threshold Slider"
+  #     unique_id: c5x_charging_threshold_slider
+  #     icon: mdi:battery-charging
+  #     state: "{{ states('sensor.c5x_charging_threshold') | float }}"
+  #     set_value:
+  #       - action: rest_command.c5x_set_charging_threshold
+  #     step: 5
+  #     min: 70
+  #     max: 100
+
 switch:
   - platform: template
     switches:
       c5x_preconditioning_switch:
         friendly_name: "C5X Preconditioning Switch"
         unique_id: c5x_preconditioning_switch
-        icon_template: mdi:thermometer-lines
         # availability_template:
         value_template: >-
           {{ states('binary_sensor.c5x_preconditioning_active') }}
@@ -179,9 +206,9 @@ input_number:
   c5x_charging_threshold_slider:
     name: Charging Threshold Slider
     initial: 80
-    min: 50
+    min: 70
     max: 100
-    step: 1
+    step: 5
     unit_of_measurement: "%"
     icon: mdi:battery-charging
 
@@ -204,8 +231,12 @@ automation:
   - alias: "Citroen C5X: Position"
     description: Create or update Citroen C5X device tracker
     trigger:
-      platform: state
-      entity_id: sensor.c5x_latitude, sensor.c5x_longitude
+      - platform: state
+        entity_id: sensor.c5x_latitude, sensor.c5x_longitude
+      # Time trigger ensures that the marker always displayed and never
+      # timed-out even when the position does not change in a long time
+      - platform: time_pattern
+        hours: /8
     action:
       service: device_tracker.see
       data_template:
