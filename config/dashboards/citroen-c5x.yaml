@@ -1,62 +1,134 @@
 type: sections
 max_columns: 4
 sections:
-  - type: grid
-    cards:
-      - type: custom:mushroom-title-card
-        title: 'Overview '
-        subtitle: >-
-          Last update: {{
-          as_timestamp(states('sensor.c5x_mileage_update_at'))  |
-          timestamp_custom('%Y-%m-%d at %H:%M') }}
-      - type: picture
-        image: /local/images/cars/citroen-c5x.png
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_battery_autonomy
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_fuel_autonomy
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_battery_level
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_battery_voltage
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_mileage
-        layout_options:
-          grid_columns: 4
-          grid_rows: 1
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_battery_health_capacity
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_battery_health_resistance
-  - type: grid
-    cards:
-      - type: custom:mushroom-title-card
+      - type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: ''
+            subtitle: >-
+              Last update: {{
+              as_timestamp(states('sensor.c5x_mileage_update_at'))  |
+              timestamp_custom('%Y-%m-%d at %H:%M') }}
+          - type: picture
+            image: /local/images/cars/citroen-c5x.png
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_battery_autonomy
+            name: Battery Autonomy
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_fuel_autonomy
+            name: Fuel Autonomy
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_battery_level
+            name: Battery Level
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_battery_voltage
+            name: Battery Voltage
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_mileage
+            layout_options:
+              grid_columns: 4
+              grid_rows: 1
+            name: Mileage
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_battery_health_capacity
+            name: Battery Capacity
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_battery_health_resistance
+            name: Battery Resistance
+        title: Overview
+        column_span: 1
+      - type: grid
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.c5x_charging_plugged
+            primary_info: state
+            secondary_info: none
+            layout_options:
+              grid_columns: full
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_charging_status
+            name: Status
+            visibility:
+              - condition: state
+                entity: binary_sensor.c5x_charging_plugged
+                state: 'on'
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_charging_mode
+            name: Mode
+            visibility:
+              - condition: state
+                entity: binary_sensor.c5x_charging_plugged
+                state: 'on'
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_charging_rate
+            name: Rate
+            visibility:
+              - condition: state
+                entity: binary_sensor.c5x_charging_plugged
+                state: 'on'
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_charging_remaining_time
+            name: Remaining Time
+            visibility:
+              - condition: state
+                entity: binary_sensor.c5x_charging_plugged
+                state: 'on'
+          - type: entities
+            entities:
+              - entity: sensor.c5x_charging_threshold
+                name: Current Limit
+              - entity: input_number.c5x_charging_threshold_slider
+                name: Desired Limit
+              - entity: button.c5x_charging_threshold_button
+                name: Update Limit
+            state_color: false
         title: Charging
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_charging_plugged
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_charging_status
-        name: Status
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_charging_rate
-        name: Rate
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_charging_remaining_time
-  - type: grid
-    cards:
-      - type: custom:mushroom-title-card
+        column_span: 1
+      - type: grid
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.c5x_ambient_temperature
+            name: Ambient Temperature
+            layout_options:
+              grid_columns: full
+          - type: custom:mushroom-entity-card
+            entity: binary_sensor.c5x_preconditioning_active
+            name: Preconditioning
+            layout_options:
+              grid_columns: 3
+              grid_rows: 1
+          - type: custom:mushroom-entity-card
+            entity: switch.c5x_preconditioning_switch
+            primary_info: none
+            layout_options:
+              grid_columns: 1
+              grid_rows: 1
+            secondary_info: none
+            tap_action:
+              action: toggle
+          - type: custom:mushroom-template-card
+            primary: ''
+            secondary: >-
+              The state of pre-conditioning may take time to properly update on
+              the dashboard. Please be patient...
+            icon: mdi:air-conditioner
+            layout_options:
+              grid_columns: full
+            multiline_secondary: true
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            double_tap_action:
+              action: none
         title: Climate
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_ambient_temperature
-      - type: custom:mushroom-entity-card
-        entity: sensor.c5x_preconditioning_status
-        name: Preconditioning
-  - type: grid
-    cards:
-      - type: custom:mushroom-title-card
+        column_span: 1
+      - type: grid
+        cards:
+          - type: map
+            entities:
+              - entity: device_tracker.c5x_position
+            theme_mode: dark
+            default_zoom: 16
         title: Location
-      - type: map
-        entities:
-          - entity: device_tracker.c5x_position
-        theme_mode: dark
-        default_zoom: 16
+        column_span: 1

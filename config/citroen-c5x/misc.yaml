@@ -1,0 +1,246 @@
+# Name: Citroen C5X Integration
+# Version: 2024-09-06
+
+# Base sensor that returns various JSON attributes for the vehicle.
+# It is not used directly, but wrapped into dedicated sensors that 
+# pull attribute values from this one
+sensor:
+  - platform: rest
+    name: "Citroen C5X"
+    resource: http://my-psa-car-controller:5000/get_vehicleinfo/my-vin?from_cache=1
+    scan_interval: 60
+    timeout: 30
+    value_template: 'OK'
+    json_attributes:
+      - timed_odometer
+      - battery
+      - energy
+      - environment
+      - preconditionning
+      - last_position
+    unique_id: citroen_c5x
+  - platform: rest
+    name: "Citroen C5X Charge Control"
+    resource: http://my-psa-car-controller:5000/charge_control?vin=my-vin
+    scan_interval: 60
+    timeout: 30
+    value_template: 'OK'
+    json_attributes:
+      - percentage_threshold
+    unique_id: citroen_c5x_charge_control
+
+template:
+  # Expose attributes from "citroen_c5x" as sensors
+  - sensor:
+    # Timed Odometer
+    - name: "C5X Mileage"
+      unique_id: c5x_mileage
+      device_class: distance
+      unit_of_measurement: "km"
+      icon: mdi:counter
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'timed_odometer')['mileage'] }}"
+    - name: "C5X Mileage Updated At"
+      unique_id: c5x_mileage_update_at
+      device_class: timestamp
+      icon: mdi:calendar
+      state: "{{ state_attr('sensor.citroen_c5x', 'timed_odometer')['updated_at'] }}"
+    # Battery
+    - name: "C5X Battery Voltage"
+      unique_id: c5x_battery_voltage
+      device_class: voltage
+      unit_of_measurement: "V"
+      # icon: mdi:flash-triangle-outline
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'battery')['voltage'] * 4 }}"
+    - name: "C5X Battery Current"
+      unique_id: c5x_battery_current
+      device_class: current
+      unit_of_measurement: "A"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'battery')['current'] }}"
+    # Energy (Battery)
+    - name: "C5X Battery Level"
+      unique_id: c5x_battery_level
+      device_class: battery
+      unit_of_measurement: "%"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['level'] }}"
+    - name: "C5X Battery Autonomy"
+      unique_id: c5x_battery_autonomy
+      device_class: distance
+      unit_of_measurement: "km"
+      icon: mdi:map-marker-distance
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['autonomy'] }}"
+    - name: "C5X Battery Capacity"
+      unique_id: c5x_battery_health_capacity
+      device_class: battery
+      unit_of_measurement: "%"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['battery']['health']['capacity'] }}"
+    - name: "C5X Battery Resistance"
+      unique_id: c5x_battery_health_resistance
+      device_class: battery
+      unit_of_measurement: "%"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['battery']['health']['resistance'] }}"
+    - name: "C5X Charging Status"
+      unique_id: c5x_charging_status
+      icon: >- 
+        {% if is_state('sensor.c5x_charging_status', 'InProgress') == true -%}
+          mdi:battery-charging
+        {% else -%}
+          mdi:battery-outline
+        {% endif -%}
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['status'] }}"
+    - name: "C5X Charging Remaining Time"
+      unique_id: c5x_charging_remaining_time
+      icon: mdi:clock-time-four-outline
+      state: >-
+        {% set time = state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['remaining_time'] -%}
+        {{ time | replace('PT','') | replace('H','h ') | replace('M','m') }}
+    - name: "C5X Charging Mode"
+      unique_id: c5x_charging_mode
+      icon: >-
+        {% if is_state('sensor.c5x_charging_mode', 'Slow') -%}
+          mdi:ev-plug-type2
+        {% elif is_state('sensor.c5x_charging_mode', 'Quick') -%}
+          mdi:ev-plug-ccs2
+        {% else -%}
+          mdi:power-plug-off-outline
+        {% endif -%}
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['charging_mode'] }}"
+    - name: "C5X Charging Rate"
+      unique_id: c5x_charging_rate
+      unit_of_measurement: "km/h"
+      icon: mdi:chart-bar
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['charging_rate'] }}"
+    - name: "C5X Charging Status Updated At"
+      unique_id: c5x_charging_status_updated_at
+      device_class: timestamp
+      icon: mdi:calendar
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['updated_at'] }}"
+    # Energy (Fuel)
+    - name: "C5X Fuel Autonomy"
+      unique_id: c5x_fuel_autonomy
+      device_class: distance
+      unit_of_measurement: "km"
+      icon: mdi:map-marker-distance
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[1]['autonomy'] }}"
+    # Environment
+    - name: "C5X Ambient Temperature"
+      unique_id: c5x_ambient_temperature
+      device_class: temperature
+      unit_of_measurement: "°C"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x', 'environment')['air']['temp'] }}"
+    # Last Position (Coordinates)
+    - name: "C5X Latitude"
+      unique_id: c5x_latitude
+      icon: mdi:latitude
+      state: "{{ state_attr('sensor.citroen_c5x', 'last_position')['geometry']['coordinates'][1] }}"
+    - name: "C5X Longitude"
+      unique_id: c5x_longitude
+      icon: mdi:longitude
+      state: "{{ state_attr('sensor.citroen_c5x', 'last_position')['geometry']['coordinates'][0] }}"
+    # Charge Control
+    - name: "C5X Charging Threshold"
+      unique_id: c5x_charging_threshold
+      device_class: battery
+      unit_of_measurement: "%"
+      state_class: measurement
+      state: "{{ state_attr('sensor.citroen_c5x_charge_control', 'percentage_threshold') }}"
+      icon: mdi:battery-charging
+
+  # Expose attributes from "citroen_c5x" as binary sensors
+  - binary_sensor:
+    # Energy (Battery)
+    - name: "C5X Charging Plugged"
+      unique_id: c5x_charging_plugged
+      device_class: plug
+      state: "{{ state_attr('sensor.citroen_c5x', 'energy')[0]['charging']['plugged'] }}"
+    # Preconditioning
+    - name: "C5X Preconditioning Active"
+      unique_id: c5x_preconditioning_active
+      device_class: running
+      state: "{{ iif(state_attr('sensor.citroen_c5x', 'preconditionning')['air_conditioning']['status'] == 'Enabled', true, false) }}"
+
+  # Create buttons to pair with REST API commands
+  - button:
+      name: "C5X Charging Threshold Button"
+      unique_id: c5x_charging_threshold_button
+      icon: mdi:battery-charging
+      # availability:
+      press:
+        - action: rest_command.c5x_set_charging_threshold
+
+  # WIP: Send {{ value }} to the REST Command
+  # - number:
+  #     name: "C5X Charging Threshold Slider"
+  #     unique_id: c5x_charging_threshold_slider
+  #     icon: mdi:battery-charging
+  #     state: "{{ states('sensor.c5x_charging_threshold') | float }}"
+  #     set_value:
+  #       - action: rest_command.c5x_set_charging_threshold
+  #     step: 5
+  #     min: 70
+  #     max: 100
+
+switch:
+  - platform: template
+    switches:
+      c5x_preconditioning_switch:
+        friendly_name: "C5X Preconditioning Switch"
+        unique_id: c5x_preconditioning_switch
+        # availability_template:
+        value_template: >-
+          {{ states('binary_sensor.c5x_preconditioning_active') }}
+        turn_on:
+          service: rest_command.c5x_activate_preconditioning
+        turn_off:
+          service: rest_command.c5x_deactivate_preconditioning
+
+input_number:
+  c5x_charging_threshold_slider:
+    name: Charging Threshold Slider
+    initial: 80
+    min: 70
+    max: 100
+    step: 5
+    unit_of_measurement: "%"
+    icon: mdi:battery-charging
+
+
+rest_command:
+  c5x_wakeup:
+    url: "http:///my-psa-car-controller:5000/wakeup/my-vin"
+  c5x_set_charging_threshold:
+    url: "http://my-psa-car-controller:5000/charge_control?vin=my-vin&percentage={{ states('input_number.c5x_charging_threshold_slider') | int }}"
+    method: GET
+  c5x_activate_preconditioning:
+    url: "http://my-psa-car-controller:5000/preconditioning/my-vin/1"
+    method: GET
+  c5x_deactivate_preconditioning:
+    url: "http://my-psa-car-controller:5000/preconditioning/my-vin/0"
+    method: GET
+
+automation:
+  # Device tracker for car location
+  - alias: "Citroen C5X: Position"
+    description: Create or update Citroen C5X device tracker
+    trigger:
+      - platform: state
+        entity_id: sensor.c5x_latitude, sensor.c5x_longitude
+      # Time trigger ensures that the marker always displayed and never
+      # timed-out even when the position does not change in a long time
+      - platform: time_pattern
+        hours: /8
+    action:
+      service: device_tracker.see
+      data_template:
+        dev_id: c5x_position
+        gps:
+          - "{{ states('sensor.c5x_latitude') }}"
+          - "{{ states('sensor.c5x_longitude') }}"
