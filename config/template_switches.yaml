@@ -1,16 +1,23 @@
 # Dumb Device: Yamaha Amplifier
 # Availability: when Zigbee smart plug is ON
-# Value: Consider as "ON" when power consumption on smart plug is more than 5 watts
-- platform: template
-  switches:
-    yamaha_amplifier_switch:
-      friendly_name: Yamaha Amplifer Switch
-      unique_id: yamaha_amplifier_switch
-      availability_template: >-
-        {{ is_state('switch.tz3000_8nkb7mof_ts0121_switch_3', 'on') }}
-      value_template: >-
-        {{ iif(states('sensor.tz3000_8nkb7mof_ts0121_active_power_3') | float > 5, true, false) }}
-      turn_on:
-        service: script.yamaha_amplifier_power
-      turn_off:
-        service: script.yamaha_amplifier_power
+# Value: Consider as "ON" when power consumption on smart plug is more than 4 watts
+binary_sensor:
+  - platform: threshold
+    entity_id: sensor.plug_living_room_amplifier_power
+    lower: 4
+    upper: 100
+    name: Power State - Amplifier
+switch:
+  - platform: template
+    switches:
+      yamaha_amplifier_switch:
+        friendly_name: Yamaha Amplifer Switch
+        unique_id: yamaha_amplifier_switch
+        availability_template: >-
+          {{ is_state('switch.plug_living_room_amplifier', 'on') }}
+        value_template: >-
+          {{ states('binary_sensor.power_state_amplifier') }}
+        turn_on:
+          service: script.yamaha_amplifier_power
+        turn_off:
+          service: script.yamaha_amplifier_power
