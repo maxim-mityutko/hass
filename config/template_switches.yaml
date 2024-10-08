@@ -21,3 +21,26 @@ switch:
           service: script.yamaha_amplifier_power
         turn_off:
           service: script.yamaha_amplifier_power
+          
+# Dumb Device: Ampster
+# Availability: when Zigbee smart plug is ON
+# Value: Consider as "ON" when power consumption on smart plug is more than 4 watts
+binary_sensor:
+  - platform: threshold
+    entity_id: sensor.plug_study_amplifier_power
+    upper: 5
+    name: Power State - Ampster
+switch:
+  - platform: template
+    switches:
+      yamaha_amplifier_switch:
+        friendly_name: Ampster Amplifer Switch
+        unique_id: ampster_amplifier_switch
+        availability_template: >-
+          {{ is_state('switch.plug_study_amplifier', 'on') }}
+        value_template: >-
+          {{ states('binary_sensor.power_state_ampster') }}
+        turn_on:
+          service: script.ampster_optical_in
+        turn_off:
+          service: script.ampster_off
