@@ -42,9 +42,11 @@
    * Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
  * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x3)
 
-## Xiaomi
- * [Plant Sensor - HHCC HHCCJCY01](https://esphome.io/components/sensor/xiaomi_ble.html?fbclid=IwZXh0bgNhZW0CMTAAAR38jsIqiCFlHGqq2riR1D2kFn9CKpR2cV1XfjHqSVYGuj0uJQwKFP6W2Gc_aem_t7kL8tHXd7t1HfHCv7Mosw#hhccjcy01) (x10)
+## Xiaomi (BLE)
+ * [Plant Sensor - HHCC HHCCJCY01](https://esphome.io/components/sensor/xiaomi_ble.html?fbclid=IwZXh0bgNhZW0CMTAAAR38jsIqiCFlHGqq2riR1D2kFn9CKpR2cV1XfjHqSVYGuj0uJQwKFP6W2Gc_aem_t7kL8tHXd7t1HfHCv7Mosw#hhccjcy01) (x14)
    * Review on [Smart Home Scene](https://smarthomescene.com/reviews/xiaomi-miflora-plant-sensor-tuya-version-hhccjcy10-review/)
+ * [Presence Sensor - XMOSB01XS] (x3)
+   * Review on [Smart Home Scene](https://smarthomescene.com/reviews/xiaomi-battery-ble-occupancy-sensor-review/)
 
 ## Flic (replaced with Shelly buttons)
   * [Flic Hub LR](https://flic.io/shop/flic-hub-lr) (x1)
