@@ -40,7 +40,7 @@
   * Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
  * [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x6)
    * Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
- * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x3)
+ * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x6)
 
 ## Xiaomi (BLE)
  * [Plant Sensor - HHCC HHCCJCY01](https://esphome.io/components/sensor/xiaomi_ble.html?fbclid=IwZXh0bgNhZW0CMTAAAR38jsIqiCFlHGqq2riR1D2kFn9CKpR2cV1XfjHqSVYGuj0uJQwKFP6W2Gc_aem_t7kL8tHXd7t1HfHCv7Mosw#hhccjcy01) (x14)
