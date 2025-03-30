@@ -7,6 +7,7 @@
 * [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html) (x2)
 * [Yuabguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1)
 * [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
+* [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x1)
 
 ## ESPHome
 * [Marcel Zuidwijk's Smart Doorbell](https://www.zuidwijk.com/product/smart-doorbell/) (x1)
@@ -29,6 +30,7 @@
   * Usage instructions: [RTX Zigbee Tuya ZIR aka. TS1201](https://github.com/zigpy/zha-device-handlers/issues/1687)
   * Review: [Tuya Zigbee IR Blaster Remote ZS06 Review](https://smarthomescene.com/reviews/tuya-zigbee-infrared-ir-remote-zs06-review/)
 * [Ledvance Outdoor Plug](https://zigbee.blakadder.com/Ledvance_4058075729322.html) (x4)
+  * _NOTE: Two plugs died after 1.5 years - one was actively used, the other was basically cold spare. Reached out to customer support._  
 * [Heiman HS1SA Smoke Sensor](https://zigbee.blakadder.com/Heiman_HS1SA.html) (x5)
   * Review: [Heiman ZigBee Smoke Sensor And Alarm Review](https://smarthomescene.com/reviews/heiman-zigbee-smoke-sensor-and-alarm-review/)
 * [Lonsonho (?) Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html)
@@ -61,6 +63,8 @@
 ## Shelly
   * [Shelly Plus 2PM](https://www.shelly.com/en-nl/products/product-overview/shelly-plus-2-pm) (x2)
   * [Shelly 1PM Mini Gen3](https://www.shelly.com/en-nl/products/product-overview/shelly-1-pm-mini-gen3) (x1 not installed)
+  * [Shelly PM Mini Gen3](https://www.shelly.com/products/shelly-pm-mini-gen3) (x1 not isntalled)
+  * [Shelly Pro EM-50](https://www.shelly.com/products/shelly-pro-em-50) (x1 not installed)
   * [Shelly 1 Mini Gen3](https://www.shelly.com/en/products/shop/shelly-1-mini-gen-3) (x1)
   * [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2)
   * [Shelly BLU H&T](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-h-and-t) (x1)
