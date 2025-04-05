@@ -1,0 +1,55 @@
+# The Honeywell Home HR92 thermostats does not change the state when heating is activated. This set of sensors implement minimal and
+# very approximate monitoring based on the observation that heating kicks in when current temperature is less than desired temperature
+# by 0.3 degrees, the threshold however can be adjusted.
+# Ref: https://www.home-assistant.io/integrations/binary_sensor/#device-class
+input_number:
+  heating_activation_threshold:
+    name: Heating Activation Threshold
+    mode: slider
+    initial: 0.3
+    min: 0
+    max: 1
+    step: 0.1
+    unit_of_measurement: "°C"
+    icon: mdi:heating-coil
+
+template:
+	- binary_sensor:
+		- name: Heating Study
+		  unique_id: heating_study
+		  device_class: heat
+		  state: "{{ state_attr('climate.study', 'temperature') | float(0.0) - state_attr('climate.study', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+		  availability: "{{ is_number(state_attr('climate.study', 'current_temperature')) and is_number(state_attr('climate.study', 'temperature')) }}"
+		- name: Heating Living Room
+		  unique_id: heating_living_room
+		  device_class: heat
+		  state: "{{ state_attr('climate.living_room', 'temperature') | float(0.0) - state_attr('climate.living_room', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+		  availability: "{{ is_number(state_attr('climate.living_room', 'current_temperature')) and is_number(state_attr('climate.living_room', 'temperature')) }}"
+		- name: Heating Master Bedroom 
+		  unique_id: heating_master_bedroom
+		  device_class: heat
+		  state: "{{ state_attr('climate.bedroom', 'temperature') | float(0.0) - state_attr('climate.bedroom', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+		  availability: "{{ is_number(state_attr('climate.bedroom', 'current_temperature')) and is_number(state_attr('climate.bedroom', 'temperature')) }}"
+		- name: Heating Bedroom
+		  unique_id: heating_bedroom
+		  device_class: heat
+		  state: "{{ state_attr('climate.room', 'temperature') | float(0.0) - state_attr('climate.room', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+		  availability: "{{ is_number(state_attr('climate.room', 'current_temperature')) and is_number(state_attr('climate.room', 'temperature')) }}"
+		- name: Heating Storage
+		  unique_id: heating_storage
+		  device_class: heat
+		  state: "{{ state_attr('climate.storage', 'temperature') | float(0.0) - state_attr('climate.storage', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+		  availability: "{{ is_number(state_attr('climate.storage', 'current_temperature')) and is_number(state_attr('climate.storage', 'temperature')) }}"
+
+binary_sensor:
+  - platform: group
+    name: Sensor Group Heating
+    unique_id: sensor_group_heating
+    device_class: heat
+    all: false
+    entities:
+      - binary_sensor.heating_study
+      - binary_sensor.heating_living_room
+      - binary_sensor.heating_master_bedroom
+      - binary_sensor.heating_bedroom
+      - binary_sensor.heating_storage
