@@ -7,7 +7,7 @@
 * [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html) (x2)
 * [Yuabguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1)
 * [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
-* [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x1)
+* [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x3)
 
 ## ESPHome
 * [Marcel Zuidwijk's Smart Doorbell](https://www.zuidwijk.com/product/smart-doorbell/) (x1)
@@ -29,8 +29,8 @@
   * Native support in Zigbee2MQTT
   * Usage instructions: [RTX Zigbee Tuya ZIR aka. TS1201](https://github.com/zigpy/zha-device-handlers/issues/1687)
   * Review: [Tuya Zigbee IR Blaster Remote ZS06 Review](https://smarthomescene.com/reviews/tuya-zigbee-infrared-ir-remote-zs06-review/)
-* [Ledvance Outdoor Plug](https://zigbee.blakadder.com/Ledvance_4058075729322.html) (x4)
-  * _NOTE: Two plugs died after 1.5 years - one was actively used, the other was basically cold spare. Reached out to customer support._  
+* [Ledvance Outdoor Plug](https://zigbee.blakadder.com/Ledvance_4058075729322.html) (x1 / x1-spare)
+  * _NOTE: Two plugs died after 1.5 years - one was actively used, the other was basically cold spare. Refunded by Amazon._  
 * [Heiman HS1SA Smoke Sensor](https://zigbee.blakadder.com/Heiman_HS1SA.html) (x5)
   * Review: [Heiman ZigBee Smoke Sensor And Alarm Review](https://smarthomescene.com/reviews/heiman-zigbee-smoke-sensor-and-alarm-review/)
 * [Lonsonho (?) Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html)
