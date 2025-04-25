@@ -1,0 +1,192 @@
+# Prefixes: 
+#   'wiim' - WiiM streamer integration via LinkPlay
+#   'mass' - WiiM streamer integration via Music Assistant (MASS)
+#
+# Integration through 'Music Assistant' allows access to playlists, tracks and albums
+# which otherwise are not available natively through HASS or LinkPlay. This enables
+# easy automations to play specific playlist which is either managed through MASS,
+# Tidal or any other service that can be integrated into MASS.
+
+automation:
+  - alias: "Multimedia: Living Room Amplifier - Turn On for TV"
+    description: >-
+      If TV in the living room turns on, then turn on the amplifier and switch input
+      to optical
+    triggers:
+      - trigger: state
+        entity_id:
+          - media_player.tv_living_room
+        to: "on"
+    conditions: []
+    actions:
+      - if:
+          - condition: state
+            entity_id: switch.yamaha_amplifer_switch
+            state: "off"
+        then:
+          - action: switch.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: switch.yamaha_amplifer_switch
+          - wait_for_trigger:
+              - trigger: state
+                entity_id:
+                  - switch.yamaha_amplifer_switch
+                to: "on"
+                from: null
+                for:
+                  hours: 0
+                  minutes: 0
+                  seconds: 2
+            timeout:
+              hours: 0
+              minutes: 0
+              seconds: 5
+              milliseconds: 0
+      - action: script.yamaha_amplifier_optical_in
+        data: {}
+    mode: single
+  - alias: "Multimedia: Living Room Amplifier - Turn On for WiiM"
+    description: >-
+      If WiiM in the living room starts playing, then turn on the amplifier and
+      switch input to coaxial
+    triggers:
+      - trigger: state
+        entity_id:
+          - media_player.mass_living_room
+          - media_player.wiim_living_room
+        to: playing
+    conditions: []
+    actions:
+      - if:
+          - condition: state
+            entity_id: switch.yamaha_amplifer_switch
+            state: "off"
+        then:
+          - action: switch.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: switch.yamaha_amplifer_switch
+          - wait_for_trigger:
+              - trigger: state
+                entity_id:
+                  - switch.yamaha_amplifer_switch
+                to: "on"
+                from: null
+                for:
+                  hours: 0
+                  minutes: 0
+                  seconds: 2
+            timeout:
+              hours: 0
+              minutes: 0
+              seconds: 5
+              milliseconds: 0
+      - action: script.yamaha_amplifier_coaxial_in
+        data: {}
+    mode: single
+  - alias: "Multimedia: Living Room Amplifier - Turn Off"
+    description: >-
+      Turn off amplifier in the living room if all multimedia devices are inactive
+      or turned off
+    triggers:
+      - trigger: state
+        entity_id:
+          - media_player.mass_living_room
+          - media_player.wiim_living_room
+        to: idle
+        for:
+          hours: 0
+          minutes: 5
+          seconds: 0
+      - trigger: state
+        entity_id:
+          - media_player.mass_living_room
+          - media_player.wiim_living_room
+        to: paused
+        for:
+          hours: 0
+          minutes: 5
+          seconds: 0
+      - trigger: state
+        entity_id:
+          - media_player.tv_living_room
+        to: "off"
+        for:
+          hours: 0
+          minutes: 5
+          seconds: 0
+    conditions:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: media_player.mass_living_room
+            state: playing
+            enabled: true
+          - condition: state
+            entity_id: media_player.wiim_living_room
+            state: playing
+          - condition: state
+            entity_id: media_player.tv_living_room
+            state: "on"
+    actions:
+      - if:
+          - condition: state
+            entity_id: switch.yamaha_amplifer_switch
+            state: "on"
+        then:
+          - action: switch.turn_off
+            metadata: {}
+            data: {}
+            target:
+              entity_id: switch.yamaha_amplifer_switch
+    mode: single
+  - alias: "Theo: Music"
+    description: Turn on amplifier in the living room and start streaming Theo's playlist
+    triggers: []
+    conditions: []
+    actions:
+      - if:
+          - condition: state
+            entity_id: switch.yamaha_amplifer_switch
+            state: "off"
+        then:
+          - action: switch.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: switch.yamaha_amplifer_switch
+          - wait_for_trigger:
+              - trigger: state
+                entity_id:
+                  - switch.yamaha_amplifer_switch
+                to: "on"
+                from: null
+                for:
+                  hours: 0
+                  minutes: 0
+                  seconds: 2
+            timeout:
+              hours: 0
+              minutes: 0
+              seconds: 5
+              milliseconds: 0
+      - action: script.yamaha_amplifier_coaxial_in
+        data: {}
+      - action: music_assistant.play_media
+        metadata: {}
+        data:
+          media_type: playlist
+          enqueue: replace
+          media_id: Theo's List
+        target:
+          entity_id: media_player.mass_living_room
+      - action: media_player.shuffle_set
+        metadata: {}
+        data:
+          shuffle: true
+        target:
+          entity_id: media_player.mass_living_room
+    mode: single
