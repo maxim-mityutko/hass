@@ -9,6 +9,15 @@
 * [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
 * [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x3)
 
+```
+Ref Tasmota commands to improve usage expirience or configure parameters that are not available through UI:
+- PowerDelta<x>  - report on active power load change, e.g. 103 = 3W delta, can be useful if plug is
+                   used to detect power on / off state of a dumb device
+- PowerOnState 1 - always ON
+
+More details: https://tasmota.github.io/docs/Commands/#control
+```
+
 ## ESPHome
 * [Marcel Zuidwijk's Smart Doorbell](https://www.zuidwijk.com/product/smart-doorbell/) (x1)
   * Docs: https://www.zuidwijk.com/smart-doorbell/
