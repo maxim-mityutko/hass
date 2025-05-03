@@ -44,3 +44,10 @@ switch:
           service: script.ampster_optical_in
         turn_off:
           service: script.ampster_off
+
+# Dumb Device: Turntable
+binary_sensor:
+  - platform: threshold
+    entity: sensor.plug_turntable_energy_power
+    upper: 3
+    name: Power State - Turntable

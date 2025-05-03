@@ -47,6 +47,7 @@ automation:
       - action: script.yamaha_amplifier_optical_in
         data: {}
     mode: single
+
   - alias: "Multimedia: Living Room Amplifier - Turn On for WiiM"
     description: >-
       If WiiM in the living room starts playing, then turn on the amplifier and
@@ -87,6 +88,48 @@ automation:
       - action: script.yamaha_amplifier_coaxial_in
         data: {}
     mode: single
+
+  - alias: "Multimedia: Living Room Amplifier - Turn On for Turntable"
+    description: >-
+      If turntable in the living room turns on, then turn on the amplifier and
+      switch input to phono
+    triggers:
+      - trigger: state
+        entity_id:
+          - binary_sensor.power_state_turntable
+        from: null
+        to: "on"
+    conditions: []
+    actions:
+      - if:
+          - condition: state
+            entity_id: switch.yamaha_amplifer_switch
+            state: "off"
+        then:
+          - action: switch.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: switch.yamaha_amplifer_switch
+          - wait_for_trigger:
+              - trigger: state
+                entity_id:
+                  - switch.yamaha_amplifer_switch
+                to: "on"
+                from: null
+                for:
+                  hours: 0
+                  minutes: 0
+                  seconds: 2
+            timeout:
+              hours: 0
+              minutes: 0
+              seconds: 5
+              milliseconds: 0
+      - action: script.yamaha_amplifier_phono_in
+        data: {}
+    mode: single
+
   - alias: "Multimedia: Living Room Amplifier - Turn Off"
     description: >-
       Turn off amplifier in the living room if all multimedia devices are inactive
@@ -118,6 +161,14 @@ automation:
           hours: 0
           minutes: 5
           seconds: 0
+      - trigger: state
+        entity_id:
+          - binary_sensor.power_state_turntable
+        to: "off"
+        for:
+          hours: 0
+          minutes: 5
+          seconds: 0
     conditions:
       - condition: not
         conditions:
@@ -131,6 +182,9 @@ automation:
           - condition: state
             entity_id: media_player.tv_living_room
             state: "on"
+          - condition: state
+            entity_id: binary_sensor.power_state_turntable
+            state: "on"
     actions:
       - if:
           - condition: state
@@ -143,6 +197,7 @@ automation:
             target:
               entity_id: switch.yamaha_amplifer_switch
     mode: single
+
   - alias: "Theo: Music"
     description: Turn on amplifier in the living room and start streaming Theo's playlist
     triggers: []
@@ -175,6 +230,12 @@ automation:
               milliseconds: 0
       - action: script.yamaha_amplifier_coaxial_in
         data: {}
+      - action: media_player.shuffle_set
+        metadata: {}
+        data:
+          shuffle: true
+        target:
+          entity_id: media_player.mass_living_room
       - action: music_assistant.play_media
         metadata: {}
         data:
@@ -183,10 +244,52 @@ automation:
           media_id: Theo's List
         target:
           entity_id: media_player.mass_living_room
+    mode: single
+
+  - alias: "Theo: Music (Nijntje)"
+    description: Turn on amplifier in the living room and start streaming Theo's playlist
+    triggers: []
+    conditions: []
+    actions:
+      - if:
+          - condition: state
+            entity_id: switch.yamaha_amplifer_switch
+            state: "off"
+        then:
+          - action: switch.turn_on
+            metadata: {}
+            data: {}
+            target:
+              entity_id: switch.yamaha_amplifer_switch
+          - wait_for_trigger:
+              - trigger: state
+                entity_id:
+                  - switch.yamaha_amplifer_switch
+                to: "on"
+                from: null
+                for:
+                  hours: 0
+                  minutes: 0
+                  seconds: 2
+            timeout:
+              hours: 0
+              minutes: 0
+              seconds: 5
+              milliseconds: 0
+      - action: script.yamaha_amplifier_coaxial_in
+        data: {}
       - action: media_player.shuffle_set
         metadata: {}
         data:
-          shuffle: true
+          shuffle: false
+        target:
+          entity_id: media_player.mass_living_room
+      - action: music_assistant.play_media
+        metadata: {}
+        data:
+          media_type: playlist
+          enqueue: replace
+          media_id: Nijntje
         target:
           entity_id: media_player.mass_living_room
     mode: single
