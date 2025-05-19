@@ -52,6 +52,8 @@ More details: https://tasmota.github.io/docs/Commands/#control
  * [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x6)
    * Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
  * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x6)
+ * [Third Reality Smart Soil Moisture Sensor](https://www.zigbee2mqtt.io/devices/3RSM0147Z.html) (x1)
+   * Review: [ThirdReality Smart Soil Moisture Sensor Review](https://smarthomescene.com/reviews/thirdreality-smart-soil-moisture-sensor-review/)
 
 ## Xiaomi (BLE)
  * [Plant Sensor - HHCC HHCCJCY01](https://esphome.io/components/sensor/xiaomi_ble.html?fbclid=IwZXh0bgNhZW0CMTAAAR38jsIqiCFlHGqq2riR1D2kFn9CKpR2cV1XfjHqSVYGuj0uJQwKFP6W2Gc_aem_t7kL8tHXd7t1HfHCv7Mosw#hhccjcy01) (x14)
