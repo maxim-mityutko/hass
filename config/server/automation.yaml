@@ -1,0 +1,23 @@
+automation:
+  - alias: 'Server Rack: Overheating'
+    description: 'Actions that should be taken when temperature inside the server rack exceeds the threshold'
+    triggers:
+    - trigger: state
+      entity_id:
+      - binary_sensor.server_rack_overheating
+      from:
+      to: 'on'
+    conditions: []
+    actions:
+    - action: light.turn_on
+      data:
+        brightness_pct: 100
+        rgb_color:
+        - 255
+        - 0
+        - 0
+        flash: long
+        effect: Slow Pulse
+      target:
+        entity_id: light.apollo_temp_1b_42_0e5ec8_rgb_light
+    mode: single
