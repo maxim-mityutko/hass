@@ -9,8 +9,9 @@
 * [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
 * [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x3)
 
+
+*Tasmota commands to improve usage expirience or configure parameters that are not available through UI:*
 ```
-Ref Tasmota commands to improve usage expirience or configure parameters that are not available through UI:
 - PowerDelta<x>  - report on active power load change, e.g. 103 = 3W delta, can be useful if plug is
                    used to detect power on / off state of a dumb device
 - PowerOnState 1 - always ON
@@ -27,7 +28,10 @@ More details: https://tasmota.github.io/docs/Commands/#control
   * Repo: https://github.com/smarthomeshop/waterp1meterkit
  * [SlimmeLezer](https://www.zuidwijk.com/product/slimmelezer-plus/) (x1 not installed)
    * Replaced with `WaterP1MeterKit` in favour of PoE and water metering
-   * Repo: https://github.com/zuidwijk/dsmr 
+   * Repo: https://github.com/zuidwijk/dsmr
+ * [Apollo TEMP-1B](https://apolloautomation.com/products/temp-1)
+   * Docs: https://apolloautomation.com/products/temp-1   
+   * Repo: https://github.com/ApolloAutomation/TEMP-1
     
 ## Zigbee
 * [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1 not installed)
