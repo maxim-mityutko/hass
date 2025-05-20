@@ -32,6 +32,7 @@ More details: https://tasmota.github.io/docs/Commands/#control
  * [Apollo TEMP-1B](https://apolloautomation.com/products/temp-1)
    * Docs: https://apolloautomation.com/products/temp-1   
    * Repo: https://github.com/ApolloAutomation/TEMP-1
+   * Review: [Apollo TEMP-1 Probe Temperature Sensor Review](https://smarthomescene.com/reviews/apollo-temp-1-probe-temperature-sensor-review/)
     
 ## Zigbee
 * [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1 not installed)
