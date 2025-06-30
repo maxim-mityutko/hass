@@ -8,3 +8,17 @@ recorder:
   purge_keep_days: 365
   db_url: !secret postgres_connection_string
   db_retry_wait: 30
+  exclude:
+    domains:
+      - openplantbook
+      - plant
+      - sun
+      - update
+      - remote
+      - conversation
+      - media_player
+    entity_globs:
+      - sensor.sun*
+      - binary_sensor.dev_phone_*
+      - binary_sensor.pixel_9_*
+      - binary_sensor.2107113sg_*
