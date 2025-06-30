@@ -1,6 +1,0 @@
-template:
-  - binary_sensor:
-    - name: "Server Rack Overheating"
-      unique_id: server_rack_overheating
-      device_class: heat
-      state: "{{ states('sensor.apollo_temp_1b_42_0e5ec8_temperature_probe') | float > states('number.apollo_temp_1b_42_0e5ec8_max_probe_temp') | float }}"

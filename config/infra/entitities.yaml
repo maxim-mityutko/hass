@@ -1,0 +1,17 @@
+template:
+  - binary_sensor:
+    - name: "Server Rack Overheating"
+      unique_id: server_rack_overheating
+      device_class: heat
+      state: "{{ states('sensor.apollo_temp_1b_42_0e5ec8_temperature_probe') | float > states('number.apollo_temp_1b_42_0e5ec8_max_probe_temp') | float }}"
+  - sensor:
+    - name: "Device Health: Z2M Offline Devices"
+      unique_id: device_health_z2m_offline_devices
+      state: >
+        {% set result = namespace(sensors=[]) %}
+        {% for state in states.sensor | rejectattr('attributes.device_class', 'undefined') | selectattr('attributes.device_class', '==', 'timestamp') %}
+            {% if 'last_seen' in state.entity_id and (states(state.entity_id) == 'unavailable' or states(state.entity_id) == 'unknown' or ((as_timestamp(now()) - as_timestamp(states(state.entity_id))) > ((24 | int) * 60 * 60 ))) %}
+                {% set result.sensors = result.sensors + [state.name | regex_replace(find=' last seen', replace='') ~ ' (' ~ relative_time(strptime(states(state.entity_id), '%Y-%m-%dT%H:%M:%S%z', 'unavailable')) ~ ')'] %}
+            {% endif %}
+        {% endfor %}
+        {{ result.sensors | join('\n') | truncate(254, True) }}
