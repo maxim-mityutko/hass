@@ -54,7 +54,6 @@ More details: https://tasmota.github.io/docs/Commands/#control
   * Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
 * [Tuya WSD500A - Temperature and Humidity Sensor](https://zigbee.blakadder.com/Tuya_WSD500A.html) (x3)
   * Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
-  * _NOTE: The sensor stopped sending any updates after 1 year, but is still able to (re)join the network._  
  * [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x6)
    * Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
  * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x6)
