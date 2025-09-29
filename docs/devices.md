@@ -5,7 +5,7 @@
 
 ## Tasmota
 * [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html) (x2)
-* [Yuabguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1)
+* [Yuanguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1)
 * [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
 * [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x3)
 
@@ -59,6 +59,7 @@ More details: https://tasmota.github.io/docs/Commands/#control
  * [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x6)
  * [Third Reality Smart Soil Moisture Sensor](https://www.zigbee2mqtt.io/devices/3RSM0147Z.html) (x3)
    * Review: [ThirdReality Smart Soil Moisture Sensor Review](https://smarthomescene.com/reviews/thirdreality-smart-soil-moisture-sensor-review/)
+ * [Aqara Bulb T2 E27](https://www.zigbee2mqtt.io/devices/T2_E27.html) (x1)
 
 ## Xiaomi (BLE)
  * [Plant Sensor - HHCC HHCCJCY01](https://esphome.io/components/sensor/xiaomi_ble.html?fbclid=IwZXh0bgNhZW0CMTAAAR38jsIqiCFlHGqq2riR1D2kFn9CKpR2cV1XfjHqSVYGuj0uJQwKFP6W2Gc_aem_t7kL8tHXd7t1HfHCv7Mosw#hhccjcy01) (x14)
@@ -85,3 +86,5 @@ More details: https://tasmota.github.io/docs/Commands/#control
   * [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2)
   * [Shelly BLU H&T](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-h-and-t) (x1)
   * [Shelly BLU Button Tough 1](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-button-tough-1-matte-black) (x3)
+  * [Shelly Power Strip 4 Gen4](https://www.shelly.com/products/shelly-power-strip-4-gen4) (x1)
+    * Connected to HASS via Shelly integration, paired to ZigBee network to act as a router   
