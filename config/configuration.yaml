@@ -5,20 +5,67 @@ zha:
   custom_quirks_path: /config/custom_zha_quirks/
 
 recorder:
-  purge_keep_days: 365
+  purge_keep_days: 60
   db_url: !secret postgres_connection_string
   db_retry_wait: 30
-  exclude:
+  include:
     domains:
-      - openplantbook
-      - plant
-      - sun
-      - update
-      - remote
-      - conversation
-      - media_player
+      - light
+      - climate
     entity_globs:
-      - sensor.sun*
-      - binary_sensor.dev_phone_*
-      - binary_sensor.pixel_9_*
-      - binary_sensor.2107113sg_*
+      # Energy
+      - sensor.plug_*_power
+      - sensor.plug_*_energy
+      - sensor.plug_*_energy_today
+      - sensor.plug_*_energy_total
+      - sensor.outdoor_plug_*_power
+      - sensor.outdoor_plug_*_energy
+      - sensor.outdoor_plug_*_energy_today
+      - sensor.outdoor_plug_*_energy_total
+      - sensor.power_strip_*_power
+      - sensor.power_strip_*_energy
+      # Energy - Shelly
+      - sensor.shelly*_power
+      - sensor.shelly*_energy
+      # Energy - Solar
+      - sensor.*_total_energy_today
+      - sensor.*_total_output_power
+      # Temperature / Humidity / Heating
+      - sensor.sensor_temperature_*_temperature
+      - sensor.sensor_temperature_*_humidity
+      - binary_sensor.sensor_heating_*_heating
+      # Home Safety
+      - binary_sensor.sensor_group_*
+      - binary_sensor.sensor_door_*_contact
+      - binary_sensor.sensor_smoke_*_smoke
+      - binary_sensor.sensor_water_leak_*_water_leak
+      - binary_sensor.occupancy_sensor_*_occupancy
+      - binary_sensor.doorbell
+      # Home Safety - Frigate
+      - sensor.garden_person_active_count
+      - sensor.garden_person_count
+      - binary_sensor.garden_motion
+      - binary_sensor.garden_person_occupancy
+      # Device Health
+      - binary_sensor.*_overcurrent
+      - binary_sensor.*_overheating
+      - binary_sensor.*_overpowering
+      - binary_sensor.*_overvoltage
+      - sensor.*_device_temperature
+    entities:
+      - weather.metno
+      # Outside Temperature
+      - sensor.sbht_003c_5c40_temperature
+      - sensor.sbht_003c_5c40_humidity
+      # Server Rack
+      - sensor.apollo_temp_1b_42_0e5ec8_temperature_probe
+      - sensor.server_rack_switch_0_energy
+      - sensor.server_rack_switch_0_power
+      # Energy - P1
+      - sensor.waterp1meterkit_energy_consumed_tariff_1
+      - sensor.waterp1meterkit_energy_consumed_tariff_2
+      - sensor.waterp1meterkit_energy_produced_tariff_1
+      - sensor.waterp1meterkit_energy_produced_tariff_2
+      - sensor.waterp1meterkit_gas_consumed
+      - sensor.waterp1meterkit_waterp1meterkit_total_consumption
+      - sensor.waterp1meterkit_waterp1meterkit_current_usage

@@ -1,0 +1,38 @@
+# Ref: Use below query to identify entities that produce a lot
+# of unwanted data and bloat states table
+#
+# select
+#   sm.entity_id
+#   , count(*) * 100 / t.rc as rc_pct
+#   , count(*) as rc
+# from states s 
+#   inner join states_meta sm
+#     on s.metadata_id = sm.metadata_id
+#   cross join (
+#     select count(*) as rc from states
+#   ) t
+# group by sm.entity_id
+#   , t.rc
+# order by rc desc
+
+automation:
+  - alias: "Maintenance: Purge Noisy Entities"
+    description: >-
+      Delete records for entities that produce too much unwanted data
+    triggers:
+      - trigger: time
+        at: "08:00:00"
+    actions:
+      - action: recorder.purge_entities
+        data:
+          keep_days: 7
+          entity_id: sensor.server_rack_switch_0_current
+
+  - alias: "Maintenance: Purge States"
+    description: Purge 'states' table and keep desired amount of days
+    triggers: []
+    actions:
+      - action: recorder.purge
+        data:
+          keep_days: 60
+          repack: yes
