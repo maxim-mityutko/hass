@@ -24,9 +24,6 @@ sequence:
       heating_end_time: >-
         {{ as_timestamp(now() + timedelta(minutes=interval_minutes)) |
         timestamp_custom('%H:%M') }}
-      temperature_rollback_time: >-
-        {{ as_timestamp(now() + timedelta(minutes=interval_minutes + 1)) |
-        timestamp_custom('%H:%M') }}
   - action: scheduler.add
     metadata: {}
     data:
@@ -42,7 +39,6 @@ sequence:
                 temperature: "{{ target_temperature }}"
                 hvac_mode: heat
         - start: "{{ heating_end_time }}"
-          stop: "{{ temperature_rollback_time }}"
           actions:
             - entity_id: "{{ thermostat }}"
               service: climate.set_temperature
