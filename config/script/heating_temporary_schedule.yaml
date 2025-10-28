@@ -9,11 +9,11 @@
 #   - Scheduler Component: https://github.com/nielsfaber/scheduler-component
 # 
 # Description:
-#   Create temporary schedule and configure heating for the selected thermostat.
-#   The schedule is interval based, meaning the start of the schedule is always
-#   the current time and the end is between 30-180 minutes in the future. Upon
-#   reaching the end of the required interval, the required temperature is rolled
-#   back to initial value and the schedule is deleted.
+#   Create temporary heating schedule for the selected thermostat. The start is 
+#   always the current time and the end is between 30-180 minutes in the future. 
+#   Upon reaching the end of the interval, temperature setting is rolled  back to 
+#   the initial value and the schedule is deleted. If calculated end time crosses
+#   the midnight, the schedule end will be capped at 23:59.
 #
 # To-do:
 #   - FIX: Incorrect scheduling when interval end time is after midnight
@@ -22,11 +22,11 @@ sequence:
       initial_temperature: "{{ state_attr(thermostat, 'temperature') }}"
       heating_start_time: "{{ as_timestamp(now()) | timestamp_custom('%H:%M') }}"
       heating_end_time: >-
-        {{ as_timestamp(now() + timedelta(minutes=interval_minutes)) |
-        timestamp_custom('%H:%M') }}
-      temperature_rollback_time: >-
-        {{ as_timestamp(now() + timedelta(minutes=interval_minutes + 1)) |
-        timestamp_custom('%H:%M') }}
+        {% if now().date() == (now() + timedelta(minutes=interval_minutes)).date() %} 
+          {{ as_timestamp(now() + timedelta(minutes=interval_minutes)) | timestamp_custom('%H:%M') }}
+        {% else %}
+          23:59
+        {% endif %}
   - action: scheduler.add
     metadata: {}
     data:
@@ -42,7 +42,6 @@ sequence:
                 temperature: "{{ target_temperature }}"
                 hvac_mode: heat
         - start: "{{ heating_end_time }}"
-          stop: "{{ temperature_rollback_time }}"
           actions:
             - entity_id: "{{ thermostat }}"
               service: climate.set_temperature
@@ -53,11 +52,11 @@ alias: Heating Temporary Schedule
 mode: single
 icon: mdi:thermostat
 description: >-
-  Create temporary schedule and configure heating for the selected thermostat.
-  The schedule is interval based, meaning the start of the schedule is always
-  the current time and the end is between 30-180 minutes in the future. Upon
-  reaching the end of the required interval, the required temperature is rolled
-  back to initial value and the schedule is deleted.
+  Create temporary heating schedule for the selected thermostat. The start is 
+  always the current time and the end is between 30-180 minutes in the future. 
+  Upon reaching the end of the interval, temperature setting is rolled  back to 
+  the initial value and the schedule is deleted. If calculated end time crosses
+  the midnight, the schedule end will be capped at 23:59.
 fields:
   thermostat:
     selector:
