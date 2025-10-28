@@ -1,7 +1,16 @@
-# The Honeywell Home HR92 thermostats does not change the state when heating is activated. This set of sensors implement minimal and
-# very approximate monitoring based on the observation that heating kicks in when current temperature is less than desired temperature
-# by 0.3 degrees, the threshold however can be adjusted.
-# Ref: https://www.home-assistant.io/integrations/binary_sensor/#device-class
+# Version: 2025-10-28
+# 
+# Description:
+#   Thermostat management has been moved to "Better Thermostat" integration, which provides necessary attributes to
+#   monitor the state of the thermostat, hence binary sensors are simplified and the threshold becomes redundant
+#
+# Version: 0001-01-01
+#
+# Description:
+#   The Honeywell Home HR92 thermostats does not change the state when heating is activated. This set of sensors implement minimal and
+#   very approximate monitoring based on the observation that heating kicks in when current temperature is less than desired temperature
+#   by 0.3 degrees, the threshold however can be adjusted.
+#   Ref: https://www.home-assistant.io/integrations/binary_sensor/#device-class
 input_number:
   heating_activation_threshold:
     name: Heating Activation Threshold
@@ -18,28 +27,38 @@ template:
     - name: Heating Study
       unique_id: sensor_heating_study_heating
       device_class: heat
-      state: "{{ state_attr('climate.study', 'temperature') | float(0.0) - state_attr('climate.study', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
-      availability: "{{ is_number(state_attr('climate.study', 'current_temperature')) and is_number(state_attr('climate.study', 'temperature')) }}"
+      # state: "{{ state_attr('climate.study', 'temperature') | float(0.0) - state_attr('climate.study', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+      # availability: "{{ is_number(state_attr('climate.study', 'current_temperature')) and is_number(state_attr('climate.study', 'temperature')) }}"
+      state: "{{ is_state_attr('climate.thermostat_study', 'hvac_action', 'heating') }}"
+      availability: "{{ state_attr('climate.thermostat_study', 'hvac_action') != None }}"
     - name: Heating Living Room
       unique_id: sensor_heating_living_room_heating
       device_class: heat
-      state: "{{ state_attr('climate.living_room', 'temperature') | float(0.0) - state_attr('climate.living_room', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
-      availability: "{{ is_number(state_attr('climate.living_room', 'current_temperature')) and is_number(state_attr('climate.living_room', 'temperature')) }}"
+      # state: "{{ state_attr('climate.living_room', 'temperature') | float(0.0) - state_attr('climate.living_room', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+      # availability: "{{ is_number(state_attr('climate.living_room', 'current_temperature')) and is_number(state_attr('climate.living_room', 'temperature')) }}"
+      state: "{{ is_state_attr('climate.thermostat_living_room', 'hvac_action', 'heating') }}"
+      availability: "{{ state_attr('climate.thermostat_living_room', 'hvac_action') != None }}"
     - name: Heating Master Bedroom
       unique_id: sensor_heating_master_bedroom_heating
       device_class: heat
-      state: "{{ state_attr('climate.bedroom', 'temperature') | float(0.0) - state_attr('climate.bedroom', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
-      availability: "{{ is_number(state_attr('climate.bedroom', 'current_temperature')) and is_number(state_attr('climate.bedroom', 'temperature')) }}"
+      # state: "{{ state_attr('climate.bedroom', 'temperature') | float(0.0) - state_attr('climate.bedroom', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+      # availability: "{{ is_number(state_attr('climate.bedroom', 'current_temperature')) and is_number(state_attr('climate.bedroom', 'temperature')) }}"
+      state: "{{ is_state_attr('climate.thermostat_master_bedroom', 'hvac_action', 'heating') }}"
+      availability: "{{ state_attr('climate.thermostat_master_bedroom', 'hvac_action') != None }}"
     - name: Heating Bedroom
       unique_id: sensor_heating_bedroom_heating
       device_class: heat
-      state: "{{ state_attr('climate.room', 'temperature') | float(0.0) - state_attr('climate.room', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
-      availability: "{{ is_number(state_attr('climate.room', 'current_temperature')) and is_number(state_attr('climate.room', 'temperature')) }}"
+      # state: "{{ state_attr('climate.room', 'temperature') | float(0.0) - state_attr('climate.room', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+      # availability: "{{ is_number(state_attr('climate.room', 'current_temperature')) and is_number(state_attr('climate.room', 'temperature')) }}"
+      state: "{{ is_state_attr('climate.thermostat_bedroom', 'hvac_action', 'heating') }}"
+      availability: "{{ state_attr('climate.thermostat_bedroom', 'hvac_action') != None }}"
     - name: Heating Storage
       unique_id: sensor_heating_storage_heating
       device_class: heat
-      state: "{{ state_attr('climate.storage', 'temperature') | float(0.0) - state_attr('climate.storage', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
-      availability: "{{ is_number(state_attr('climate.storage', 'current_temperature')) and is_number(state_attr('climate.storage', 'temperature')) }}"
+      # state: "{{ state_attr('climate.storage', 'temperature') | float(0.0) - state_attr('climate.storage', 'current_temperature') | float(0.0) >= states('input_number.heating_activation_threshold') | float }}"
+      # availability: "{{ is_number(state_attr('climate.storage', 'current_temperature')) and is_number(state_attr('climate.storage', 'temperature')) }}"
+      state: "{{ is_state_attr('climate.thermostat_storage', 'hvac_action', 'heating') }}"
+      availability: "{{ state_attr('climate.thermostat_storage', 'hvac_action') != None }}"
 
 binary_sensor:
   - platform: group
