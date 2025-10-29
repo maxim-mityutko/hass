@@ -2,7 +2,7 @@
 #
 # Parameters:
 #   - thermostat: entity_id
-#   - interval_minutes: integer
+#   - duration_minutes: integer
 #   - target_temperature: integer
 #
 # Dependencies:
@@ -22,8 +22,8 @@ sequence:
       initial_temperature: "{{ state_attr(thermostat, 'temperature') }}"
       heating_start_time: "{{ as_timestamp(now()) | timestamp_custom('%H:%M') }}"
       heating_end_time: >-
-        {% if now().date() == (now() + timedelta(minutes=interval_minutes)).date() %} 
-          {{ as_timestamp(now() + timedelta(minutes=interval_minutes)) | timestamp_custom('%H:%M') }}
+        {% if now().date() == (now() + timedelta(minutes=duration_minutes)).date() %} 
+          {{ as_timestamp(now() + timedelta(minutes=duration_minutes)) | timestamp_custom('%H:%M') }}
         {% else %}
           23:59
         {% endif %}
@@ -66,7 +66,7 @@ fields:
     default: climate.thermostat_living_room
     required: true
     name: Thermostat
-  interval_minutes:
+  duration_minutes:
     selector:
       number:
         min: 30
@@ -74,7 +74,7 @@ fields:
         step: 15
     default: 60
     required: true
-    name: Interval (minutes)
+    name: Duration (minutes)
   target_temperature:
     selector:
       number:
