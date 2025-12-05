@@ -176,6 +176,16 @@ template:
       press:
         - action: rest_command.c5x_set_charging_threshold
 
+  - switch:
+    - unique_id: c5x_preconditioning_switch
+      turn_on:
+        - action: rest_command.c5x_activate_preconditioning
+      turn_off:
+        - action: rest_command.c5x_deactivate_preconditioning
+      default_entity_id: switch.c5x_preconditioning_switch
+      name: C5X Preconditioning Switch
+      state: '{{ states(''binary_sensor.c5x_preconditioning_active'') }}'
+
   # WIP: Send {{ value }} to the REST Command
   # - number:
   #     name: "C5X Charging Threshold Slider"
@@ -188,19 +198,6 @@ template:
   #     min: 70
   #     max: 100
 
-switch:
-  - platform: template
-    switches:
-      c5x_preconditioning_switch:
-        friendly_name: "C5X Preconditioning Switch"
-        unique_id: c5x_preconditioning_switch
-        # availability_template:
-        value_template: >-
-          {{ states('binary_sensor.c5x_preconditioning_active') }}
-        turn_on:
-          service: rest_command.c5x_activate_preconditioning
-        turn_off:
-          service: rest_command.c5x_deactivate_preconditioning
 
 input_number:
   c5x_charging_threshold_slider:
