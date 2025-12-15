@@ -8,10 +8,13 @@
 ## Tasmota
 
 - [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html) (x2)
-- [Yuanguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1)
+- [Yuanguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1-spare)
+  - **2025-12-15**: Replaced with *Shelly Power Strip 4 Gen4*. The device was rock-solid, but lacked power metering capabilities.
 - [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
 - [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x3)
-
+- [Nous A5T Smart Power Strip](https://templates.blakadder.com/nous_A5T.html) (x1-spare)
+  - **2025-12-15**: Used *Shelly Power Strip 4 Gen4* instead, because it provides power metering for each socket, while this device only reports cumulative consumption.
+    
 *[Tasmota commands](https://tasmota.github.io/docs/Commands/#control) to improve usage expirience or configure parameters that are not available through UI:*
 
 - *PowerDelta\<x>  - report on active power load change, e.g. 103 = 3W delta, can be useful if plug is used to detect power on / off state of a dumb device*
@@ -26,7 +29,7 @@
 - [WaterP1MeterKit](https://waterp1meterkit.nl/) (x1)
   - Docs: <https://smarthomeshop.io/handleiding/waterp1meterkit>
   - Repo: <https://github.com/smarthomeshop/waterp1meterkit>
-- [SlimmeLezer](https://www.zuidwijk.com/product/slimmelezer-plus/) (x1 not installed)
+- [SlimmeLezer](https://www.zuidwijk.com/product/slimmelezer-plus/) (x1-spare)
   - Replaced with `WaterP1MeterKit` in favour of PoE and water metering
   - Repo: <https://github.com/zuidwijk/dsmr>
 - [Apollo TEMP-1B](https://apolloautomation.com/products/temp-1)
@@ -36,33 +39,31 @@
 
 ## Zigbee
 
-- [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1 not installed)
+- [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1-spare)
 
 - [SMLIGHT SLZB-06 Controller with POE](https://smlight.tech/product/slzb-06/) (x1)
   - Used with Zigbee2MQTT
   - Device reports incorrect high temperature and [sensor requires calibration](https://support.smlight.tech/supportcenter/public/en/blog/high_temp)
-  - **2025-10-01**: Started to experience [SRSP - SYS - ping after 6000ms on Z2M start](https://support.smlight.tech/supportcenter/public/en/blog/sys_ping_6000) error
-
 - [Univeral Infrared Remote Controller](https://zigbee.blakadder.com/Moes_UFO-R11.html) (x2)
   - Custom Quirk for ZHA: [TS1201](https://github.com/ferehcarb/zha-device-handlers/blob/dev/zhaquirks/tuya/ts1201.py)
   - Native support in Zigbee2MQTT
   - Usage instructions: [RTX Zigbee Tuya ZIR aka. TS1201](https://github.com/zigpy/zha-device-handlers/issues/1687)
   - Review: [Tuya Zigbee IR Blaster Remote ZS06 Review](https://smarthomescene.com/reviews/tuya-zigbee-infrared-ir-remote-zs06-review/)
-- [Ledvance Outdoor Plug](https://zigbee.blakadder.com/Ledvance_4058075729322.html) (x1 / x1-spare)
+- [Ledvance Outdoor Plug](https://zigbee.blakadder.com/Ledvance_4058075729322.html) (x1-spare)
   - *NOTE: Two plugs died after 1.5 years - one was actively used, the other was basically cold spare. Refunded by Amazon.*  
 - [Heiman HS1SA Smoke Sensor](https://zigbee.blakadder.com/Heiman_HS1SA.html) (x5)
   - Review: [Heiman ZigBee Smoke Sensor And Alarm Review](https://smarthomescene.com/reviews/heiman-zigbee-smoke-sensor-and-alarm-review/)
-- [Lonsonho (?) Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html)
+- [Lonsonho Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html) (x3-spare)
 - Tuya SZ-T04 - Temperature & Humidity (x1)
   - Custom Quirk: [TS0601 Temperature](https://github.com/jacekk015/zha_quirks/blob/main/ts0601_temperature.py)
   - Custom Quirk Issue Thread: [TZE200_locansqn TS0601 Temp / Humi / Clock](https://github.com/zigpy/zha-device-handlers/issues/1286)
   - Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
 - [Tuya WSD500A - Temperature and Humidity Sensor](https://zigbee.blakadder.com/Tuya_WSD500A.html) (x5)
   - Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
-- [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x6)
+- [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x7)
   - Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
-- [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x6)
-- [ThirdReality Smart Soil Moisture Sensor](https://www.zigbee2mqtt.io/devices/3RSM0147Z.html) (x3)
+- [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x5 / x1-spare)
+- [ThirdReality Smart Soil Moisture Sensor](https://www.zigbee2mqtt.io/devices/3RSM0147Z.html) (x6)
   - Review: [ThirdReality Smart Soil Moisture Sensor Review](https://smarthomescene.com/reviews/thirdreality-smart-soil-moisture-sensor-review/)
 - [Aqara Bulb T2 E27](https://www.zigbee2mqtt.io/devices/T2_E27.html) (x1)
   - **2025-10-02**: Installed in the outdoor light fixture. No issues, rock solid connection to the coordinator. Repaired some sensors (eg. ThirdReality) directly to it. The only concern is the device temperature, that feels a bit on the high side, especially for the indoor use, it reports 36 degrees while ambient temperature is 16.
@@ -89,12 +90,15 @@
 
 - [Shelly Plus 2PM](https://www.shelly.com/en-nl/products/product-overview/shelly-plus-2-pm) (x2)
 - [Shelly 1PM Mini Gen3](https://www.shelly.com/en-nl/products/product-overview/shelly-1-pm-mini-gen3) (x1)
-- [Shelly PM Mini Gen3](https://www.shelly.com/products/shelly-pm-mini-gen3) (x1 not isntalled)
-- [Shelly Pro EM-50](https://www.shelly.com/products/shelly-pro-em-50) (x1 not installed)
+- [Shelly PM Mini Gen3](https://www.shelly.com/products/shelly-pm-mini-gen3) (x1-spare)
+- [Shelly Pro EM-50](https://www.shelly.com/products/shelly-pro-em-50) (x1-spare)
 - [Shelly 1 Mini Gen3](https://www.shelly.com/en/products/shop/shelly-1-mini-gen-3) (x1)
 - [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2)
 - [Shelly BLU H&T](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-h-and-t) (x1)
 - [Shelly BLU Button Tough 1](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-button-tough-1-matte-black) (x3)
-- [Shelly Power Strip 4 Gen4](https://www.shelly.com/products/shelly-power-strip-4-gen4) (x1)
+- [Shelly Power Strip 4 Gen4](https://www.shelly.com/products/shelly-power-strip-4-gen4) (x2)
   - **2025-09-28**: Connected to HASS via Shelly integration, paired to ZigBee network to act as a router;
+  - **2025-10-01**: Started to experience [SRSP - SYS - ping after 6000ms on Z2M start](https://support.smlight.tech/supportcenter/public/en/blog/sys_ping_6000) error on the coordinator
   - **2025-10-12**: [Device experiences intermittent issues with UI connectivity](/docs/tests/shelly-power-strip-4-gen4.md)
+  - **2025-12-15**: The issue with the coordinator seems to be resolved after the upgrade to **Zigbee2MQTT 2.7.1**
+  - **2025-12-15**: The UI issues are no longer present for whatever reason.
