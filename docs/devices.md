@@ -100,5 +100,7 @@
   - **2025-09-28**: Connected to HASS via Shelly integration, paired to ZigBee network to act as a router;
   - **2025-10-01**: Started to experience [SRSP - SYS - ping after 6000ms on Z2M start](https://support.smlight.tech/supportcenter/public/en/blog/sys_ping_6000) error on the coordinator
   - **2025-10-12**: [Device experiences intermittent issues with UI connectivity](/docs/tests/shelly-power-strip-4-gen4.md)
-  - **2025-12-15**: The issue with the coordinator seems to be resolved after the upgrade to **Zigbee2MQTT 2.7.1**
+  - ~~**2025-12-15**: The issue with the coordinator seems to be resolved after the upgrade to **Zigbee2MQTT 2.7.1**~~
   - **2025-12-15**: The UI issues are no longer present for whatever reason.
+  - **2025-12-29**: The issues with unresponsive Zigbee network continues, rebooting the coordinator for now to resolve.
+    Other people seem to be experiencing similar issue: [ref](https://community.home-assistant.io/t/zigbee-network-instability-flooding-with-two-shelly-power-strip-4-gen4-zigbee2mqtt-cc2652p7/936623)
