@@ -39,11 +39,29 @@
 
 ## Zigbee
 
-- [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1-spare)
+### Coordinator
 
 - [SMLIGHT SLZB-06 Controller with POE](https://smlight.tech/product/slzb-06/) (x1)
   - Used with Zigbee2MQTT
   - Device reports incorrect high temperature and [sensor requires calibration](https://support.smlight.tech/supportcenter/public/en/blog/high_temp)
+- [SMLIGHT SLZB-06M Controller with POE](https://smlight.tech/product/slzb-06m/) (x1-spare)
+
+### Aqara
+
+- [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x7)
+  - Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
+- [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x5 / x1-spare)
+- [Aqara VC-X01D - Valve](https://www.zigbee2mqtt.io/devices/VC-X01D.html#aqara-vc-x01d) (x1)
+  - Review: [Aqara T1 Water/Gas Valve Controller Review](https://smarthomescene.com/reviews/aqara-t1-water-gas-valve-controller-review/)
+- [Aqara Bulb T2 E27](https://www.zigbee2mqtt.io/devices/T2_E27.html) (x1)
+  - **2025-10-02**: Installed in the outdoor light fixture. No issues, rock solid connection to the coordinator. Repaired some sensors (eg. ThirdReality) directly to it. The only concern is the device temperature, that feels a bit on the high side, especially for the indoor use, it reports 36 degrees while ambient temperature is 16.
+ 
+### IKEA
+
+- [IKEA E2201 Rodret - Dimmer](https://www.zigbee2mqtt.io/devices/E2201.html#ikea-e2201) (x2)
+  - Using [Awesome HA Blueprints - Controller - IKEA E2201 RODRET Dimmer](https://epmatt.github.io/awesome-ha-blueprints/docs/blueprints/controllers/ikea_e2201) for easy dimming automations
+
+### Misc
 - [Univeral Infrared Remote Controller](https://zigbee.blakadder.com/Moes_UFO-R11.html) (x2)
   - Custom Quirk for ZHA: [TS1201](https://github.com/ferehcarb/zha-device-handlers/blob/dev/zhaquirks/tuya/ts1201.py)
   - Native support in Zigbee2MQTT
@@ -60,13 +78,10 @@
   - Review: [Zigbee Temperature & Humidity Sensor With A Screen SZ-T04 Review](https://smarthomescene.com/reviews/zigbee-temperature-humidity-sensor-with-a-screen-sz-t04-review/)
 - [Tuya WSD500A - Temperature and Humidity Sensor](https://zigbee.blakadder.com/Tuya_WSD500A.html) (x5)
   - Review: [Tuya Temperature & Humidity Sensor WSD500A](https://smarthomescene.com/reviews/tuya-temperature-humidity-sensor-wsd500a/)
-- [Aqara MCCGQ11LM - Door / Windows Sensor](https://zigbee.blakadder.com/Aqara_MCCGQ11LM.html) (x7)
-  - Disassembly instructions before painting: [Painting contact sensors (ft. Aqara E1 disassembly)](https://community.home-assistant.io/t/hhi-painting-contact-sensors-ft-aqara-e1-disassembly/401704)
-- [Aqara SJCGQ11LM - Water Leak Sensor](https://zigbee.blakadder.com/Aqara_SJCGQ11LM.html) (x5 / x1-spare)
 - [ThirdReality Smart Soil Moisture Sensor](https://www.zigbee2mqtt.io/devices/3RSM0147Z.html) (x6)
   - Review: [ThirdReality Smart Soil Moisture Sensor Review](https://smarthomescene.com/reviews/thirdreality-smart-soil-moisture-sensor-review/)
-- [Aqara Bulb T2 E27](https://www.zigbee2mqtt.io/devices/T2_E27.html) (x1)
-  - **2025-10-02**: Installed in the outdoor light fixture. No issues, rock solid connection to the coordinator. Repaired some sensors (eg. ThirdReality) directly to it. The only concern is the device temperature, that feels a bit on the high side, especially for the indoor use, it reports 36 degrees while ambient temperature is 16.
+
+
 
 ## Xiaomi (BLE)
 
