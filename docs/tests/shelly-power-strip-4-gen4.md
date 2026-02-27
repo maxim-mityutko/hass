@@ -9,6 +9,16 @@ The device sends too much updates for certain metrics via Zigbee protocol which 
 - Configured `debounce` parameter in device settings to 5 seconds, while simultaneously configuring `debounce_ignore` for `power_x` and `state_x` properties.
     <img width="1315" height="246" alt="image" src="https://github.com/user-attachments/assets/bca9ea6a-b425-4dc4-8df4-c43cfa26451f" />
 
+**UPDATE 2026-02-27**
+
+Altered the reporting frequency for `currentSummReceived` in the `seMetering` cluster.
+    <img width="1420" height="113" alt="image" src="https://github.com/user-attachments/assets/500ef6d7-96d2-40f8-8331-894695d2bb73" />
+Message frequency improved significantly, though it is still high compared to other devices.
+    <img width="1143" height="260" alt="image" src="https://github.com/user-attachments/assets/0fd29921-00e8-40e2-a7dd-f7f8510c5224" />
+
+
+If you end up here, take a look at [this thread](https://community.shelly.cloud/topic/11528-zigbee-network-instability-flooding-with-two%C2%A0shelly-power-strip-4-gen4%C2%A0zigbee2mqtt-cc2652p7/#findComment-50654) on Shelly's forum as well.
+
 ## UI Availability
 
 The UI of the device becomes occasionally not available and power strip stops responding to ping. At the same time the Zigbee integration via Zigbee2MQTT and native Home Assistant integration via WebSocket operates without delays or issues. After some time UI and ping starts to work again. If the device is constantly pinged then connectivity to the UI is never lost.
