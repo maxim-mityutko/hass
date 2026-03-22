@@ -7,7 +7,7 @@
 
 ## Tasmota
 
-- [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html) (x2)
+- [Novostella UT55507 9W](https://templates.blakadder.com/novostella_UT55507.html) (x1 / x1-spare)
 - [Yuanguo 4AC+2USB Power Strip](https://templates.blakadder.com/yuanguo_4AC_2USB.html) (x1-spare)
   - **2025-12-15**: Replaced with *Shelly Power Strip 4 Gen4*. The device was rock-solid, but lacked power metering capabilities.
 - [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
@@ -58,8 +58,11 @@
  
 ### IKEA
 
-- [IKEA E2201 Rodret - Dimmer](https://www.zigbee2mqtt.io/devices/E2201.html#ikea-e2201) (x2)
+- [IKEA E2201 Rodret - Dimmer](https://www.zigbee2mqtt.io/devices/E2201.html#ikea-e2201) (x2 / x1-spare)
   - Using [Awesome HA Blueprints - Controller - IKEA E2201 RODRET Dimmer](https://epmatt.github.io/awesome-ha-blueprints/docs/blueprints/controllers/ikea_e2201) for easy dimming automations
+- [IKEA Tradfri E27 - Bulb](https://www.zigbee2mqtt.io/devices/LED2103G5.html) (x1)
+- [IKEA Tradfri E27 - Bulb](https://www.zigbee2mqtt.io/devices/LED2201G8.html) (x3-spare)
+- IKEA Tradfri E12 - Bulb (x2-spare)
 
 ### Misc
 - [Univeral Infrared Remote Controller](https://zigbee.blakadder.com/Moes_UFO-R11.html) (x2)
