@@ -1,5 +1,7 @@
 # Citroen C5X Integration
 
+**DEPRECATED - USE "STELLANTIS VEHICLES" FROM HACS INSTEAD**
+
 ## About
 This integration is based on the work of [@Flodu31](https://github.com/Flodu31/HomeAssistant-PeugeotIntegration/blob/main/Citroen-ec4.md) with a few additions, namely:
 
