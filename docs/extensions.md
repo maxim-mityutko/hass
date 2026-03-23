@@ -11,6 +11,11 @@ Extensions that are used to enhance Home Assistant functionality
 * [Better Thermostat](https://github.com/KartoffelToby/better_thermostat)
 * [Battery Notes for Home Assistant](https://github.com/andrew-codechimp/HA-Battery-Notes)
 
+### Car
+
+* [Stellantis Vehicles](https://github.com/andreadegiovine/homeassistant-stellantis-vehicles)
+<br>Integrates PSA vehicles into Home Assistant. The extension also provides custom card, which works out of the box. This extension can fully replace custom [dashboard](../config/citroen-c5x/dashboard.yaml) and [entities](../config/citroen-c5x/entities.yaml) that were used originally via the [PSA-Car-Controller](https://github.com/flobz/psa_car_controller) deployment.
+
 ### Plants / Flowers
 
 * [Home Assistant OpenPlantBook](https://github.com/Olen/home-assistant-openplantbook)
