@@ -1,6 +1,35 @@
 # Shelly Power Strip 4 Gen4
 
 ## Update Frequency
+
+**UPDATE: 2026-04-07**
+
+Further tweaked reporting frequencies for some attributes, which got the number of messages per second to **0.2041** over 50 hours of statistics. Have not observed any ZigBee network instabilities after the 2026-02-27 update.
+
+| Cluster                 | Attribute            | Min Interval | Max Interval | Min Change |
+| ----------------------- | -------------------- | ------------ | ------------ | ---------- |
+| haElectricalMeasurement | activePower          | 15           | 65000        | 5          |
+|                         | rmsVoltage           | 300          | 65000        | 5          |
+|                         | rmsCurrent           | 15           | 65000        | 1          |
+|                         | acFrequency          | 300          | 65000        | 5          |
+|                         | powerFactor          | 300          | 65000        | 1          |
+|                         | apparentPower        | 15           | 65000        | 5          |
+| seMetering              | currentSummDelivered | 60           | 65000        | 10         |
+|                         | currentSummReceived  | 60           | 65000        | 10         |
+
+Take a look at [this thread](https://community.shelly.cloud/topic/11528-zigbee-network-instability-flooding-with-two%C2%A0shelly-power-strip-4-gen4%C2%A0zigbee2mqtt-cc2652p7/#findComment-50654) on Shelly's forum as well.
+
+---
+**UPDATE: 2026-02-27**
+
+Altered the reporting frequency for `currentSummReceived` in the `seMetering` cluster.
+    <img width="1420" height="113" alt="image" src="https://github.com/user-attachments/assets/500ef6d7-96d2-40f8-8331-894695d2bb73" />
+Message frequency improved significantly, though it is still high compared to other devices.
+    <img width="1143" height="260" alt="image" src="https://github.com/user-attachments/assets/0fd29921-00e8-40e2-a7dd-f7f8510c5224" />
+
+---
+**ORIGINAL POST**
+
 The device sends too much updates for certain metrics via Zigbee protocol which floods the MQTT server with unnecessary messages.
 
 - Configured new reporting criteria for `acFrequency` and `apparentPower` for each endpoint (see screenshot). This reduced the frequency of updates that are broadcasted via Zigbee protocol.
@@ -9,15 +38,6 @@ The device sends too much updates for certain metrics via Zigbee protocol which 
 - Configured `debounce` parameter in device settings to 5 seconds, while simultaneously configuring `debounce_ignore` for `power_x` and `state_x` properties.
     <img width="1315" height="246" alt="image" src="https://github.com/user-attachments/assets/bca9ea6a-b425-4dc4-8df4-c43cfa26451f" />
 
-**UPDATE 2026-02-27**
-
-Altered the reporting frequency for `currentSummReceived` in the `seMetering` cluster.
-    <img width="1420" height="113" alt="image" src="https://github.com/user-attachments/assets/500ef6d7-96d2-40f8-8331-894695d2bb73" />
-Message frequency improved significantly, though it is still high compared to other devices.
-    <img width="1143" height="260" alt="image" src="https://github.com/user-attachments/assets/0fd29921-00e8-40e2-a7dd-f7f8510c5224" />
-
-
-If you end up here, take a look at [this thread](https://community.shelly.cloud/topic/11528-zigbee-network-instability-flooding-with-two%C2%A0shelly-power-strip-4-gen4%C2%A0zigbee2mqtt-cc2652p7/#findComment-50654) on Shelly's forum as well.
 
 ## UI Availability
 
