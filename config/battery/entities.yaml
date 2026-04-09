@@ -1,0 +1,52 @@
+# Version: 2026-04-09
+# 
+# Description:
+#   Display "HomeWizard Plug-In Battery" charging state at a glance.
+#
+# Integration:
+#   Documentation - https://www.home-assistant.io/integrations/homewizard/
+
+template:
+  - sensor:
+    - name: Plug-In Battery 1 State
+      unique_id: plug_in_battery_1_state
+      state: >-
+        {% if states("sensor.plug_in_battery_1_power") | float > 0 %}Charging
+        {% elif states("sensor.plug_in_battery_1_power") | float < 0 %}Discharging
+        {% else %}Standby{% endif %}
+      availability: >-
+        {{ states("sensor.plug_in_battery_1_power") != None }}
+
+automation:
+  - alias: "Plug-In Battery: Change Charging Mode"
+    description: Switch between charge / disacharge modes for the battery during day and night
+    mode: single
+    triggers:
+      - trigger: sun
+        event: sunrise
+        offset: 0
+      - trigger: sun
+        event: sunset
+        offset: 0
+    actions:
+      - choose:
+          - conditions:
+              - condition: sun
+                after: sunrise
+                before: sunset
+            sequence:
+              - action: select.select_option
+                target:
+                  entity_id: select.p1_meter_battery_group_mode
+                data:
+                  option: zero_charge_only
+          - conditions:
+              - condition: sun
+                after: sunset
+                before: sunrise
+            sequence:
+              - action: select.select_option
+                target:
+                  entity_id: select.p1_meter_battery_group_mode
+                data:
+                  option: zero_discharge_only

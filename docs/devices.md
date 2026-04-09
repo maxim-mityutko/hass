@@ -122,3 +122,8 @@
   - **2025-12-15**: The UI issues are no longer present for whatever reason.
   - **2025-12-29**: The issues with unresponsive Zigbee network continues, rebooting the coordinator for now to resolve.
     Other people seem to be experiencing similar issue: [ref](https://community.home-assistant.io/t/zigbee-network-instability-flooding-with-two-shelly-power-strip-4-gen4-zigbee2mqtt-cc2652p7/936623)
+
+## [HomeWizard](ttps://www.home-assistant.io/integrations/homewizard/)
+
+- [HomeWizard P1 Meter](https://www.homewizard.com/nl/shop/wi-fi-p1-meter/)
+- [HomeWizard Plug-In Battery](https://www.homewizard.com/nl/shop/plug-in-battery/)
