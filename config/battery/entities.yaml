@@ -13,7 +13,7 @@ template:
       state: >-
         {% if states("sensor.plug_in_battery_1_power") | float > 0 %}Charging
         {% elif states("sensor.plug_in_battery_1_power") | float < 0 %}Discharging
-        {% else %}Standby{% endif %}
+        {% else %}Idle{% endif %}
       availability: >-
         {{ states("sensor.plug_in_battery_1_power") != None }}
 
