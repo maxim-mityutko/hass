@@ -17,7 +17,7 @@ All smart devices, both wired and wireless, are connected to the dedicated VLANs
 | Device        | Port                | Protocol | Reason                                                                         |
 | ------------- | ------------------- | -------- | ------------------------------------------------------------------------------ |
 | Shelly        | update.shelly.cloud | TCP      | (Optional) Allow traffic to Shelly update server                               |
-| HomeWizard    | homewizard.com      | TCP      | Required for Plug-In batteries as they constantly monitor for firmware updates |
+| HomeWizard    | homewizard.com      | TCP      | Required for Plug-In batteries as they constantly monitor for firmware updates ([ref](https://api-documentation.homewizard.com/docs/v2/system/#plug-in-battery-exceptions)) |
 
 ### Inernal Traffic
 
