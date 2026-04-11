@@ -17,6 +17,16 @@ template:
       availability: >-
         {{ states("sensor.plug_in_battery_1_power") != None }}
 
+sensor:
+  - platform: group
+    name: Sensor Group Plug-In Battery State of Charge
+    unique_id: sensor_group_plug_in_battery_state_of_charge
+    type: mean
+    device_class: battery
+    unit_of_measurement: "%"
+    entities:
+      - sensor.plug_in_battery_1_state_of_charge
+
 automation:
   - alias: "Plug-In Battery: Change Charging Mode"
     description: Switch between charge / disacharge modes for the battery during day and night
