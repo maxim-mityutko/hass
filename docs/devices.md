@@ -74,7 +74,7 @@
   - *NOTE: Two plugs died after 1.5 years - one was actively used, the other was basically cold spare. Refunded by Amazon.*  
 - [Heiman HS1SA Smoke Sensor](https://zigbee.blakadder.com/Heiman_HS1SA.html) (x5)
   - Review: [Heiman ZigBee Smoke Sensor And Alarm Review](https://smarthomescene.com/reviews/heiman-zigbee-smoke-sensor-and-alarm-review/)
-- [Lonsonho Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html) (x2-spare)
+- [Lonsonho Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html) (x1 / x2-spare)
   - **2026-08-15**: Two devices out of four died over the span of 1 year. Plug constantly turns on / off.
 - Tuya SZ-T04 - Temperature & Humidity (x1)
   - Custom Quirk: [TS0601 Temperature](https://github.com/jacekk015/zha_quirks/blob/main/ts0601_temperature.py)
@@ -112,7 +112,7 @@
 - [Shelly PM Mini Gen3](https://www.shelly.com/products/shelly-pm-mini-gen3) (x1-spare)
 - [Shelly Pro EM-50](https://www.shelly.com/products/shelly-pro-em-50) (x1-spare)
 - [Shelly 1 Mini Gen3](https://www.shelly.com/en/products/shop/shelly-1-mini-gen-3) (x1)
-- [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2)
+- [Shelly Dimmer2](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x1 / x1-spare)
 - [Shelly BLU H&T](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-h-and-t) (x1)
 - [Shelly BLU Button Tough 1](https://www.shelly.com/en-nl/products/product-overview/shelly-blu-button-tough-1-matte-black) (x3)
 - [Shelly Power Strip 4 Gen4](https://www.shelly.com/products/shelly-power-strip-4-gen4) (x2)
@@ -123,6 +123,7 @@
   - **2025-12-15**: The UI issues are no longer present for whatever reason.
   - **2025-12-29**: The issues with unresponsive Zigbee network continues, rebooting the coordinator for now to resolve.
     Other people seem to be experiencing similar issue: [ref](https://community.home-assistant.io/t/zigbee-network-instability-flooding-with-two-shelly-power-strip-4-gen4-zigbee2mqtt-cc2652p7/936623)
+- [Shelly Dimmer4](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2-spare)
 
 ## [HomeWizard](ttps://www.home-assistant.io/integrations/homewizard/)
 
