@@ -12,8 +12,8 @@
   - **2025-12-15**: Replaced with *Shelly Power Strip 4 Gen4*. The device was rock-solid, but lacked power metering capabilities.
 - [Gosund SP111 v1.4 Power Monitoring Plug (SP111 v1.4)](https://templates.blakadder.com/gosund_SP111_v1_4) (x1)
 - [Nous A6T Power Monitoring Outdoor Plug](https://templates.blakadder.com/nous_A6T.html) (x3)
-- [Nous A5T Smart Power Strip](https://templates.blakadder.com/nous_A5T.html) (x1-spare)
-  - **2025-12-15**: Used *Shelly Power Strip 4 Gen4* instead, because it provides power metering for each socket, while this device only reports cumulative consumption.
+- [Nous A5T Smart Power Strip](https://templates.blakadder.com/nous_A5T.html) (x1)
+  - **2025-12-15**: This device only reports cumulative consumption.
     
 *[Tasmota commands](https://tasmota.github.io/docs/Commands/#control) to improve usage expirience or configure parameters that are not available through UI:*
 
@@ -74,7 +74,8 @@
   - *NOTE: Two plugs died after 1.5 years - one was actively used, the other was basically cold spare. Refunded by Amazon.*  
 - [Heiman HS1SA Smoke Sensor](https://zigbee.blakadder.com/Heiman_HS1SA.html) (x5)
   - Review: [Heiman ZigBee Smoke Sensor And Alarm Review](https://smarthomescene.com/reviews/heiman-zigbee-smoke-sensor-and-alarm-review/)
-- [Lonsonho Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html) (x3-spare)
+- [Lonsonho Tuya Zigbee Smart Plug 16A EU](https://zigbee.blakadder.com/Lonsonho_TS0121.html) (x2-spare)
+  - **2026-08-15**: Two devices out of four died over the span of 1 year. Plug constantly turns on / off.
 - Tuya SZ-T04 - Temperature & Humidity (x1)
   - Custom Quirk: [TS0601 Temperature](https://github.com/jacekk015/zha_quirks/blob/main/ts0601_temperature.py)
   - Custom Quirk Issue Thread: [TZE200_locansqn TS0601 Temp / Humi / Clock](https://github.com/zigpy/zha-device-handlers/issues/1286)
