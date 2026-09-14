@@ -20,8 +20,14 @@ Extensions that are used to enhance Home Assistant functionality
 
 * [Home Assistant OpenPlantBook](https://github.com/Olen/home-assistant-openplantbook)
 * [Home Assistant Plant](https://github.com/Olen/homeassistant-plant)
+* [Flower Card](https://github.com/Olen/lovelace-flower-card)
 
-## Cards
+### Solar
+
+* [Helios](https://helios-ha.org/helios/)
+* [Helios Forecast](https://helios-ha.org/helios-forecast/)
+
+## Standalone Cards
 
 * [Advanced Camera Card](https://github.com/dermotduffy/advanced-camera-card)
 * [Clock Weather Card](https://github.com/pkissling/clock-weather-card)
@@ -29,7 +35,6 @@ Extensions that are used to enhance Home Assistant functionality
 * [Auto Entities](https://github.com/thomasloven/lovelace-auto-entities)
 * [Mini Graph Card](https://github.com/kalkih/mini-graph-card)
 * [Scheduler Card](https://github.com/nielsfaber/scheduler-card)
-* [Flower Card](https://github.com/Olen/lovelace-flower-card)
 * [Mini Media Player](https://github.com/kalkih/mini-media-player)
 * [Mushroom Cards](https://github.com/piitaya/lovelace-mushroom)
   * Looking into replacing those with out of the box tile cards
