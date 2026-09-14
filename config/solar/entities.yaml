@@ -1,0 +1,12 @@
+template:
+  - sensor:
+    # Duplicate of the original Growatt sensor but with\n# configured state class. Otherwise the sensor is not\n# popping up in energy dashboard
+    - name: Solar Output Power
+      unique_id: solar_output_power
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: W  
+      state: >-
+        {{ states('sensor.xxx_total_output_power') }}
+      availability: >-
+        {{ states("sensor.xxx_total_output_power") != 'unavailable' }}
