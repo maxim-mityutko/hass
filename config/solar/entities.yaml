@@ -23,3 +23,14 @@ template:
         {{ states('sensor.waterp1meterkit_waterp1meterkit_current_usage') }}
       availability: >-
         {{ is_number(states("sensor.waterp1meterkit_waterp1meterkit_current_usage")) }}
+
+sensor:
+  - platform: integration
+    name: Solar Output Energy
+    unique_id: solar_output_energy
+    source: sensor.solar_output_power
+    method: left
+    round: 2
+    unit_prefix: k
+    unit_time: h
+    max_sub_interval: 0
