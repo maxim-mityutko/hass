@@ -1,6 +1,7 @@
 template:
   - sensor:
-    # Duplicate of the original Growatt sensor but with\n# configured state class. Otherwise the sensor is not\n# popping up in energy dashboard
+    # Duplicate of the original Growatt sensor but with configured state class. 
+    # Otherwise the sensor is not popping up in the energy dashboard
     - name: Solar Output Power
       unique_id: solar_output_power
       device_class: power
@@ -9,4 +10,16 @@ template:
       state: >-
         {{ states('sensor.xxx_total_output_power') }}
       availability: >-
-        {{ states("sensor.xxx_total_output_power") != 'unavailable' }}
+        {{ is_number(states("sensor.xxx_total_output_power")) }}
+  - sensor:
+    # Duplicate of the original WaterP1MeterKit sensor but with configured device class. 
+    # Otherwise the sensor throws error in energy dashboard
+    - name: Water Usage
+      unique_id: water_usage
+      device_class: volume_flow_rate
+      state_class: measurement
+      unit_of_measurement: L/min
+      state: >-
+        {{ states('sensor.waterp1meterkit_waterp1meterkit_current_usage') }}
+      availability: >-
+        {{ is_number(states("sensor.waterp1meterkit_waterp1meterkit_current_usage")) }}
