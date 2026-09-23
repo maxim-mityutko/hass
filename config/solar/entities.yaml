@@ -72,7 +72,7 @@ mqtt:
         manufacturer: Growatt
         model: T060104X
 
-    - name: Growatt Solar Power
+    - name: Growatt Solar PV Power
       unique_id: growatt_bw14100089_solar_power
       state_topic: *grott_topic
       device: *grott_device
