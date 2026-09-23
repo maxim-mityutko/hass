@@ -43,11 +43,14 @@ sensor:
   # after a restart; it is not the inverter's manufacturer-reported peak.
   - platform: statistics
     name: Growatt Maximum Grid Power
-    unique_id: growatt_bw14100089_maximum_grid_power
-    entity_id: sensor.growatt_grid_power
+    unique_id: growatt_inverter_bw14100089_maximum_grid_power
+    entity_id: sensor.growatt_inverter_bw14100089_growatt_grid_power
     state_characteristic: value_max
     sampling_size: 2016
     precision: 1
+    keep_last_sample: true
+    max_age:
+      hours: 168
 
 # Grott publishes a retained JSON payload on energy/growatt. Values are raw
 # integers; the divisors match Grott's T060104X record layout.
