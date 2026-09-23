@@ -38,13 +38,13 @@ sensor:
     unit_time: h
     max_sub_interval: 0
 
-  # Retain up to 100,000 output-power samples and expose the highest recorded
+  # Retain up to 100,000 grid-power samples and expose the highest recorded
   # value. With recorder enabled, Home Assistant restores this history after a
   # restart; it is not the inverter's manufacturer-reported peak.
   - platform: statistics
-    name: Growatt Maximum Output Power
-    unique_id: growatt_bw14100089_maximum_output_power
-    entity_id: sensor.growatt_output_power
+    name: Growatt Maximum Grid Power
+    unique_id: growatt_bw14100089_maximum_grid_power
+    entity_id: sensor.growatt_grid_power
     state_characteristic: value_max
     sampling_size: 100000
     precision: 1
