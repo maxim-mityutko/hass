@@ -61,7 +61,7 @@ mqtt:
       device:
         identifiers:
           - growatt_bw14100089
-        name: Growatt inverter BW14100089
+        name: Growatt Inverter BW14100089
         manufacturer: Growatt
         model: T060104X
 
