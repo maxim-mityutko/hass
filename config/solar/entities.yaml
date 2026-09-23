@@ -25,6 +25,9 @@ template:
         {{ is_number(states("sensor.waterp1meterkit_waterp1meterkit_current_usage")) }}
 
 sensor:
+  # Integrate the measured AC output power. This intentionally starts at the
+  # point Home Assistant begins recording; it does not use Growatt's raw
+  # lifetime counter.
   - platform: integration
     name: Solar Output Energy
     unique_id: solar_output_energy
@@ -34,6 +37,17 @@ sensor:
     unit_prefix: k
     unit_time: h
     max_sub_interval: 0
+
+  # Retain up to 100,000 output-power samples and expose the highest recorded
+  # value. With recorder enabled, Home Assistant restores this history after a
+  # restart; it is not the inverter's manufacturer-reported peak.
+  - platform: statistics
+    name: Growatt maximum output power
+    unique_id: growatt_bw14100089_maximum_output_power
+    entity_id: sensor.growatt_output_power
+    state_characteristic: value_max
+    sampling_size: 100000
+    precision: 1
 
 # Grott publishes a retained JSON payload on energy/growatt. Values are raw
 # integers; the divisors match Grott's T060104X record layout.
