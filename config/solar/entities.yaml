@@ -72,7 +72,7 @@ mqtt:
         manufacturer: Growatt
         model: T060104X
 
-    - name: Growatt Solar PV Power
+    - name: Growatt Total PV Power
       unique_id: growatt_bw14100089_solar_power
       state_topic: *grott_topic
       device: *grott_device
@@ -81,7 +81,7 @@ mqtt:
       unit_of_measurement: W
       value_template: "{{ value_json['values']['pvpowerin'] | float(0) / 10 }}"
 
-    - name: Growatt Output Power
+    - name: Growatt Total Output Power
       unique_id: growatt_bw14100089_output_power
       state_topic: *grott_topic
       device: *grott_device
