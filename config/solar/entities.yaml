@@ -8,9 +8,9 @@ template:
       state_class: measurement
       unit_of_measurement: W  
       state: >-
-        {{ states('sensor.growatt_output_power') }}
+        {{ states('sensor.growatt_inverter_bw14100089_growatt_total_output_power') }}
       availability: >-
-        {{ is_number(states("sensor.growatt_output_power")) }}
+        {{ is_number(states("sensor.growatt_inverter_bw14100089_growatt_total_output_power")) }}
   - sensor:
     # Duplicate of the original WaterP1MeterKit sensor but with configured device class. 
     # Otherwise the sensor throws error in energy dashboard
@@ -76,7 +76,7 @@ mqtt:
         model: T060104X
 
     - name: Growatt Total PV Power
-      unique_id: growatt_bw14100089_solar_power
+      unique_id: growatt_bw14100089_total_pv_power
       state_topic: *grott_topic
       device: *grott_device
       device_class: power
@@ -85,7 +85,7 @@ mqtt:
       value_template: "{{ value_json['values']['pvpowerin'] | float(0) / 10 }}"
 
     - name: Growatt Total Output Power
-      unique_id: growatt_bw14100089_output_power
+      unique_id: growatt_bw14100089_total_output_power
       state_topic: *grott_topic
       device: *grott_device
       device_class: power
