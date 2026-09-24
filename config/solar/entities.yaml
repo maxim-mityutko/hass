@@ -197,7 +197,7 @@ mqtt:
       state_topic: *grott_topic
       device: *grott_device
       device_class: energy
-      state_class: total
+      state_class: total_increasing
       unit_of_measurement: kWh
       value_template: "{{ value_json['values']['pvenergytoday'] | float(0) / 10 }}"
 
@@ -215,7 +215,7 @@ mqtt:
       state_topic: *grott_topic
       device: *grott_device
       device_class: energy
-      state_class: total
+      state_class: total_increasing
       unit_of_measurement: kWh
       value_template: "{{ value_json['values']['epv1today'] | float(0) / 10 }}"
 
@@ -233,7 +233,7 @@ mqtt:
       state_topic: *grott_topic
       device: *grott_device
       device_class: energy
-      state_class: total
+      state_class: total_increasing
       unit_of_measurement: kWh
       value_template: "{{ value_json['values']['epv2today'] | float(0) / 10 }}"
 
