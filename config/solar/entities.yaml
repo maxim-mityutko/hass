@@ -52,6 +52,17 @@ sensor:
     max_age:
       hours: 168
 
+# The inverter is offline overnight, so its reported daily counter cannot reset
+# in Home Assistant at midnight. Track the monotonic lifetime counter instead;
+# this meter resets at local midnight even while the logger is asleep.
+utility_meter:
+  growatt_energy_today:
+    name: Growatt Energy Today
+    unique_id: growatt_inverter_bw14100089_energy_today
+    source: sensor.growatt_inverter_bw14100089_growatt_lifetime_energy
+    cycle: daily
+    always_available: true
+
 # Grott publishes a retained JSON payload on energy/growatt. Values are raw
 # integers; the divisors match Grott's T060104X record layout.
 mqtt:
@@ -192,7 +203,7 @@ mqtt:
       unit_of_measurement: °C
       value_template: "{{ value_json['values']['pvtemperature'] | float(0) / 10 }}"
 
-    - name: Growatt Energy Today
+    - name: Growatt Reported Energy Today
       unique_id: growatt_bw14100089_energy_today
       state_topic: *grott_topic
       device: *grott_device
