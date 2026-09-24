@@ -53,14 +53,15 @@ sensor:
       hours: 168
 
 # The inverter is offline overnight, so its reported daily counter cannot reset
-# in Home Assistant at midnight. Track the monotonic lifetime counter instead;
-# this meter resets at local midnight even while the logger is asleep.
+# in Home Assistant at midnight. This meter resets at local midnight while also
+# accepting the inverter's later daily-counter reset when the logger wakes.
 utility_meter:
   growatt_energy_today:
     name: Growatt Energy Today
     unique_id: growatt_inverter_bw14100089_energy_today
-    source: sensor.growatt_inverter_bw14100089_growatt_lifetime_energy
+    source: sensor.growatt_inverter_bw14100089_growatt_energy_today
     cycle: daily
+    periodically_resetting: true
     always_available: true
 
 # Grott publishes a retained JSON payload on energy/growatt. Values are raw
