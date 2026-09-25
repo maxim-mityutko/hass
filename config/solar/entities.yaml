@@ -1,16 +1,15 @@
 template:
   - sensor:
-    # Duplicate of the original Growatt sensor but with configured state class. 
-    # Otherwise the sensor is not popping up in the energy dashboard
+    # Proxy sensor to abstract away underlying hardware
     - name: Solar Output Power
       unique_id: solar_output_power
       device_class: power
       state_class: measurement
       unit_of_measurement: W  
       state: >-
-        {{ states('sensor.xxx_total_output_power') }}
+        {{ states('sensor.growatt_inverter_bw14100089_growatt_total_output_power') }}
       availability: >-
-        {{ is_number(states("sensor.xxx_total_output_power")) }}
+        {{ is_number(states("sensor.growatt_inverter_bw14100089_growatt_total_output_power")) }}
   - sensor:
     # Duplicate of the original WaterP1MeterKit sensor but with configured device class. 
     # Otherwise the sensor throws error in energy dashboard
@@ -24,13 +23,232 @@ template:
       availability: >-
         {{ is_number(states("sensor.waterp1meterkit_waterp1meterkit_current_usage")) }}
 
-sensor:
-  - platform: integration
-    name: Solar Output Energy
-    unique_id: solar_output_energy
-    source: sensor.solar_output_power
-    method: left
-    round: 2
-    unit_prefix: k
-    unit_time: h
-    max_sub_interval: 0
+
+  # Retain one week of five-minute grid-power samples and expose the highest
+  # recorded value. With recorder enabled, Home Assistant restores this history
+  # after a restart; it is not the inverter's manufacturer-reported peak.
+  - platform: statistics
+    name: Growatt Maximum Grid Power
+    unique_id: growatt_inverter_bw14100089_maximum_grid_power
+    entity_id: sensor.growatt_inverter_bw14100089_growatt_grid_power
+    state_characteristic: value_max
+    sampling_size: 2016
+    precision: 1
+    keep_last_sample: true
+    max_age:
+      hours: 168
+
+# The inverter is offline overnight, so its reported daily counter cannot reset
+# in Home Assistant at midnight. This meter resets at local midnight while also
+# accepting the inverter's later daily-counter reset when the logger wakes.
+utility_meter:
+  solar_energy_today:
+    name: Solar Energy Today
+    unique_id: solar_energy_today
+    source: sensor.growatt_inverter_bw14100089_growatt_energy_today
+    cycle: daily
+    periodically_resetting: true
+    always_available: true
+
+# Grott publishes a retained JSON payload on energy/growatt. Values are raw
+# integers; the divisors match Grott's T060104X record layout.
+mqtt:
+  sensor:
+    - name: Growatt Status
+      unique_id: growatt_bw14100089_status
+      state_topic: &grott_topic energy/growatt
+      value_template: >-
+        {%- set status = value_json['values']['pvstatus'] | int(-1) -%}
+        {%- if status == 0 -%}Standby
+        {%- elif status == 1 -%}On-Grid
+        {%- elif status == 2 -%}Off-Grid
+        {%- elif status == 3 -%}Fault
+        {%- elif status == 4 -%}Flash
+        {%- else -%}Unknown
+        {%- endif -%}
+      device: &grott_device
+        identifiers:
+          - growatt_bw14100089
+        name: Growatt Inverter BW14100089
+        manufacturer: Growatt
+        model: T060104X
+
+    - name: Growatt Total PV Power
+      unique_id: growatt_bw14100089_total_pv_power
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: W
+      value_template: "{{ value_json['values']['pvpowerin'] | float(0) / 10 }}"
+
+    - name: Growatt Total Output Power
+      unique_id: growatt_bw14100089_total_output_power
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: W
+      value_template: "{{ value_json['values']['pvpowerout'] | float(0) / 10 }}"
+
+    - name: Growatt PV1 Voltage
+      unique_id: growatt_bw14100089_pv1_voltage
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: voltage
+      state_class: measurement
+      unit_of_measurement: V
+      value_template: "{{ value_json['values']['pv1voltage'] | float(0) / 10 }}"
+
+    - name: Growatt PV1 Current
+      unique_id: growatt_bw14100089_pv1_current
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+      value_template: "{{ value_json['values']['pv1current'] | float(0) / 10 }}"
+
+    - name: Growatt PV1 Power
+      unique_id: growatt_bw14100089_pv1_power
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: W
+      value_template: "{{ value_json['values']['pv1watt'] | float(0) / 10 }}"
+
+    - name: Growatt PV2 Voltage
+      unique_id: growatt_bw14100089_pv2_voltage
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: voltage
+      state_class: measurement
+      unit_of_measurement: V
+      value_template: "{{ value_json['values']['pv2voltage'] | float(0) / 10 }}"
+
+    - name: Growatt PV2 Current
+      unique_id: growatt_bw14100089_pv2_current
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+      value_template: "{{ value_json['values']['pv2current'] | float(0) / 10 }}"
+
+    - name: Growatt PV2 Power
+      unique_id: growatt_bw14100089_pv2_power
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: W
+      value_template: "{{ value_json['values']['pv2watt'] | float(0) / 10 }}"
+
+    - name: Growatt Grid Voltage
+      unique_id: growatt_bw14100089_grid_voltage
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: voltage
+      state_class: measurement
+      unit_of_measurement: V
+      value_template: "{{ value_json['values']['pvgridvoltage'] | float(0) / 10 }}"
+
+    - name: Growatt Grid Current
+      unique_id: growatt_bw14100089_grid_current
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: current
+      state_class: measurement
+      unit_of_measurement: A
+      value_template: "{{ value_json['values']['pvgridcurrent'] | float(0) / 10 }}"
+
+    - name: Growatt Grid Power
+      unique_id: growatt_bw14100089_grid_power
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: power
+      state_class: measurement
+      unit_of_measurement: W
+      value_template: "{{ value_json['values']['pvgridpower'] | float(0) / 10 }}"
+
+    - name: Growatt Grid Frequency
+      unique_id: growatt_bw14100089_grid_frequency
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: frequency
+      state_class: measurement
+      unit_of_measurement: Hz
+      value_template: "{{ value_json['values']['pvfrequentie'] | float(0) / 100 }}"
+
+    - name: Growatt Inverter Temperature
+      unique_id: growatt_bw14100089_inverter_temperature
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: temperature
+      state_class: measurement
+      unit_of_measurement: °C
+      value_template: "{{ value_json['values']['pvtemperature'] | float(0) / 10 }}"
+
+    - name: Growatt Energy Today
+      unique_id: growatt_bw14100089_energy_today
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['pvenergytoday'] | float(0) / 10 }}"
+
+    - name: Growatt Lifetime Energy
+      unique_id: growatt_bw14100089_lifetime_energy
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['pvenergytotal'] | float(0) / 10 }}"
+
+    - name: Growatt PV1 Energy Today
+      unique_id: growatt_bw14100089_pv1_energy_today
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['epv1today'] | float(0) / 10 }}"
+
+    - name: Growatt PV1 Lifetime Energy
+      unique_id: growatt_bw14100089_pv1_lifetime_energy
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['epv1total'] | float(0) / 10 }}"
+
+    - name: Growatt PV2 Energy Today
+      unique_id: growatt_bw14100089_pv2_energy_today
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['epv2today'] | float(0) / 10 }}"
+
+    - name: Growatt PV2 Lifetime Energy
+      unique_id: growatt_bw14100089_pv2_lifetime_energy
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['epv2total'] | float(0) / 10 }}"
+
+    - name: Growatt Total PV Energy
+      unique_id: growatt_bw14100089_total_pv_energy
+      state_topic: *grott_topic
+      device: *grott_device
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      value_template: "{{ value_json['values']['epvtotal'] | float(0) / 10 }}"
