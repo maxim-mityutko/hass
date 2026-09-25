@@ -1,7 +1,6 @@
 template:
   - sensor:
-    # Duplicate of the original Growatt sensor but with configured state class. 
-    # Otherwise the sensor is not popping up in the energy dashboard
+    # Proxy sensor to abstract away underlying hardware
     - name: Solar Output Power
       unique_id: solar_output_power
       device_class: power
@@ -24,19 +23,6 @@ template:
       availability: >-
         {{ is_number(states("sensor.waterp1meterkit_waterp1meterkit_current_usage")) }}
 
-sensor:
-  # Integrate the measured AC output power. This intentionally starts at the
-  # point Home Assistant begins recording; it does not use Growatt's raw
-  # lifetime counter.
-  - platform: integration
-    name: Solar Output Energy
-    unique_id: solar_output_energy
-    source: sensor.solar_output_power
-    method: left
-    round: 2
-    unit_prefix: k
-    unit_time: h
-    max_sub_interval: 0
 
   # Retain one week of five-minute grid-power samples and expose the highest
   # recorded value. With recorder enabled, Home Assistant restores this history
