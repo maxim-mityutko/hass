@@ -10,6 +10,15 @@ template:
         {{ states('sensor.growatt_inverter_bw14100089_growatt_total_output_power') }}
       availability: >-
         {{ is_number(states("sensor.growatt_inverter_bw14100089_growatt_total_output_power")) }}
+    - name: Solar Enery Lifetime
+      unique_id: solar_energy_lifetime
+      device_class: energy
+      state_class: total_increasing
+      unit_of_measurement: kWh
+      state: >-
+        {{ states('sensor.growatt_inverter_bw14100089_growatt_lifetime_energy') }}
+      availability: >-
+        {{ is_number(states("sensor.growatt_inverter_bw14100089_growatt_lifetime_energy")) }}
   - sensor:
     # Duplicate of the original WaterP1MeterKit sensor but with configured device class. 
     # Otherwise the sensor throws error in energy dashboard
