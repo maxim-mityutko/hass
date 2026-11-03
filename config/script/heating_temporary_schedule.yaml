@@ -63,6 +63,7 @@ fields:
       entity:
         filter:
           - integration: better_thermostat
+            domain: climate
     default: climate.thermostat_living_room
     required: true
     name: Thermostat
