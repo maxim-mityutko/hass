@@ -25,7 +25,6 @@
 - [Marcel Zuidwijk's Smart Doorbell](https://www.zuidwijk.com/product/smart-doorbell/) (x1)
   - Docs: <https://www.zuidwijk.com/smart-doorbell/>
   - Repo: <https://github.com/zuidwijk/esphome-doorbell/blob/main/smart-doorbell.yaml>
-
 - [WaterP1MeterKit](https://waterp1meterkit.nl/) (x1)
   - Docs: <https://smarthomeshop.io/handleiding/waterp1meterkit>
   - Repo: <https://github.com/smarthomeshop/waterp1meterkit>
@@ -36,6 +35,11 @@
   - Docs: <https://apolloautomation.com/products/temp-1>
   - Repo: <https://github.com/ApolloAutomation/TEMP-1>
   - Review: [Apollo TEMP-1 Probe Temperature Sensor Review](https://smarthomescene.com/reviews/apollo-temp-1-probe-temperature-sensor-review/)
+- [Olimex ESP32-POE-ISO-EA](https://www.olimex.com/Products/IoT/ESP32/ESP32-POE-ISO/)
+  - Quick setup (Select Olimex): https://esphome.io/projects/?type=bluetooth&diy
+  - Bluetooth proxy:
+    - [ESPHome: Bluetooth Proxy](https://esphome.io/components/bluetooth_proxy/)
+    - [Home Assistant: Remore Adapters](https://esphome.io/components/bluetooth_proxy/)
 
 ## Zigbee
 
@@ -55,16 +59,17 @@
   - Review: [Aqara T1 Water/Gas Valve Controller Review](https://smarthomescene.com/reviews/aqara-t1-water-gas-valve-controller-review/)
 - [Aqara Bulb T2 E27](https://www.zigbee2mqtt.io/devices/T2_E27.html) (x1)
   - **2025-10-02**: Installed in the outdoor light fixture. No issues, rock solid connection to the coordinator. Repaired some sensors (eg. ThirdReality) directly to it. The only concern is the device temperature, that feels a bit on the high side, especially for the indoor use, it reports 36 degrees while ambient temperature is 16.
- 
+
 ### IKEA
 
-- [IKEA E2201 Rodret - Dimmer](https://www.zigbee2mqtt.io/devices/E2201.html#ikea-e2201) (x2 / x1-spare)
+- [IKEA E2201 Rodret - Dimmer](https://www.zigbee2mqtt.io/devices/E2201.html#ikea-e2201) (x1 / x2-spare)
   - Using [Awesome HA Blueprints - Controller - IKEA E2201 RODRET Dimmer](https://epmatt.github.io/awesome-ha-blueprints/docs/blueprints/controllers/ikea_e2201) for easy dimming automations
 - [IKEA Tradfri E27 - Bulb](https://www.zigbee2mqtt.io/devices/LED2103G5.html) (x1)
 - [IKEA Tradfri E27 - Bulb](https://www.zigbee2mqtt.io/devices/LED2201G8.html) (x3-spare)
 - IKEA Tradfri E12 - Bulb (x2-spare)
 
 ### Misc
+
 - [Univeral Infrared Remote Controller](https://zigbee.blakadder.com/Moes_UFO-R11.html) (x2)
   - Custom Quirk for ZHA: [TS1201](https://github.com/ferehcarb/zha-device-handlers/blob/dev/zhaquirks/tuya/ts1201.py)
   - Native support in Zigbee2MQTT
@@ -85,8 +90,6 @@
 - [ThirdReality Smart Soil Moisture Sensor](https://www.zigbee2mqtt.io/devices/3RSM0147Z.html) (x6)
   - Review: [ThirdReality Smart Soil Moisture Sensor Review](https://smarthomescene.com/reviews/thirdreality-smart-soil-moisture-sensor-review/)
 
-
-
 ## Xiaomi (BLE)
 
 - [Plant Sensor - HHCC HHCCJCY01](https://esphome.io/components/sensor/xiaomi_ble.html?fbclid=IwZXh0bgNhZW0CMTAAAR38jsIqiCFlHGqq2riR1D2kFn9CKpR2cV1XfjHqSVYGuj0uJQwKFP6W2Gc_aem_t7kL8tHXd7t1HfHCv7Mosw#hhccjcy01) (x14)
@@ -96,14 +99,15 @@
 
 ## Flic (replaced with Shelly buttons)
 
-- [Flic Hub LR](https://flic.io/shop/flic-hub-lr) (x1)
+- [Flic Hub LR](https://flic.io/shop/flic-hub-lr) (x1-spare)
   - Hub setup requires account creation with email, however the registration process does not send any
     confirmation emails , hence even the bogus email address can be provided
   - Hub supports MQTT integration with custom JS scripts:
     - [flic2hass](https://github.com/id628/flic2hass) - MQTT integration by **id628** ([discussion](https://community.home-assistant.io/t/direct-flic-button-via-flic-hub-mqtt-integration-cloudless/553108))
     - [flic-hub-sdk-mqtt-js](https://github.com/50ButtonsEach/flic-hub-sdk-mqtt-js) - MQTT client
-- [Flic2 Button](https://flic.io/flic2) (x3 not in use, replaced with `Shelly BLU Button Tough 1`)
+- [Flic2 Button](https://flic.io/flic2) (x3-spare)
 - [Flic Twist](https://flic.io/twist) (x2)
+  - **2026-11-06**: Official HASS integration finally fully supports Twist without jumping through the hoops. Connected via Olimex bluetooth proxy and will replace the IKEA's Rodret dimmers.
 
 ## Shelly
 
@@ -122,7 +126,8 @@
   - ~~**2025-12-15**: The issue with the coordinator seems to be resolved after the upgrade to **Zigbee2MQTT 2.7.1**~~
   - **2025-12-15**: The UI issues are no longer present for whatever reason.
   - **2025-12-29**: The issues with unresponsive Zigbee network continues, rebooting the coordinator for now to resolve.
-    Other people seem to be experiencing similar issue: [ref](https://community.home-assistant.io/t/zigbee-network-instability-flooding-with-two-shelly-power-strip-4-gen4-zigbee2mqtt-cc2652p7/936623)
+    Other people seem to be experiencing similar issue: [ref](https://community.home-assistant.io/t/zigbee-network-instability-flooding-with-two-shelly-power-strip-4-gen4-zigbee2mqtt-cc2652p7/936623).
+  - **2026-11-06**: Both strips are absolutely rocksolid. Initially resolved the ZigBee network instability by manually configuring mesaging intervals. But newer firmware versions already incorporate all the proper settings, so the network operates without any issues. 
 - [Shelly Dimmer4](https://www.shelly.com/en/products/shop/shelly-dimmer2) (x2-spare)
 
 ## [HomeWizard](ttps://www.home-assistant.io/integrations/homewizard/)
