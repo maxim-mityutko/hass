@@ -108,6 +108,15 @@
 - [Flic2 Button](https://flic.io/flic2) (x3-spare)
 - [Flic Twist](https://flic.io/twist) (x2)
   - **2026-11-06**: Official HASS integration finally fully supports Twist without jumping through the hoops. Connected via Olimex bluetooth proxy and will replace the IKEA's Rodret dimmers.
+  - **2026-11-07**: Button events are not working if Twist's firmware is version 1 (it is visible in the integration after pairing). If the firmware version is 2, everything works perfectly.
+    The solution is:
+      - clean the dust off the Flic Hub LR
+      - update hub's firmware (full hub reset might be required)
+      - fully reset the Twist (extract batteries, insert batteries back and quickly hold the button for 15 seconds)
+      - pair Twist to Flic Hub
+      - just give it 10-15 minutes (seems like Twist's firmware is updated automatically, I could not find any means to force it)
+      - reset the Twist again
+      - re-pair to Home Assistant (it should report firmware version 2 now)
 
 ## Shelly
 
