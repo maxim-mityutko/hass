@@ -26,6 +26,7 @@ However, it requires an RF interface: either a Honeywell HGI80 (rare and expensi
 - [evofw3](https://github.com/ghoti57/evofw3): the original firmware for decoding the Ramses-II protocol; only works via a serial connection
 - [ramses_esp](https://github.com/IndaloTech/ramses_esp): a modern port of `evofw3` with a network stack (Wi-Fi only) that can publish Ramses-II packets to an MQTT topic
 - [ramses_esp_eth](https://github.com/PWhite-Eng/ramses_esp_eth): a port of `ramses_esp` that allegedly has full feature parity with the original and adds support for a wired connection. This opens up the tempting option of using PoE, but it looks like a one-person project (at least for now)
+- [IMMRMKW/ramses_esp](https://github.com/IMMRMKW/ramses_esp): fork of the original Ramses_esp, which is only suitable for Espressif ESP32-S3
 
 ### Hardware Options
 
